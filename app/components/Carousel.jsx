@@ -35,9 +35,11 @@ const Carousel = () => {
         {images.map((image, index) => (
           <div key={index} className="flex-shrink-0 w-full h-full">
             <Image
-              src={image}
-              alt={`Carousel Image ${index + 1}`}
-              className="w-full h-96 object-cover" // Full width and height
+              src="https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&w=600"
+              alt="Scarlet Honeyeater Bird"
+              width={600} // specify the width
+              height={400} // specify the height
+              className="w-full h-96 object-cover rounded-t-lg"
             />
           </div>
         ))}

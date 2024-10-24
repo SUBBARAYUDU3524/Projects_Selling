@@ -1,126 +1,135 @@
 import React from "react";
 import Link from "next/link";
-import {
-  FaFacebook,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedin,
-  FaGithub,
-} from "react-icons/fa";
-import { AiOutlineMail } from "react-icons/ai";
+import { FaYoutube, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { MdLocationOn, MdPhone, MdEmail } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
+  const router = useRouter();
+
   return (
-    <footer className="bg-gray-900 text-white py-8">
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-        {/* Navigation Links */}
-        <div className="mb-6 md:mb-0">
-          <h3 className="text-xl font-bold mb-4">Navigation</h3>
-          <ul className="space-y-2">
-            <li>
-              <Link href="/">
-                <span className="cursor-pointer px-3 py-1 transition-colors duration-300 ease-in-out hover:text-blue-400">
-                  Home
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/about">
-                <span className="cursor-pointer px-3 py-1 transition-colors duration-300 ease-in-out hover:text-blue-400">
-                  About Us
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/projects">
-                <span className="cursor-pointer px-3 py-1 transition-colors duration-300 ease-in-out hover:text-blue-400">
-                  Projects
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact">
-                <span className="cursor-pointer px-3 py-1 transition-colors duration-300 ease-in-out hover:text-blue-400">
-                  Contact Us
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/login">
-                <span className="cursor-pointer px-3 py-1 transition-colors duration-300 ease-in-out hover:text-blue-400">
-                  Login
-                </span>
-              </Link>
-            </li>
-          </ul>
-        </div>
+    <div className="pl-32 pr-32 bg-gray-100 pt-5 pb-5">
+      <div className="bg-black text-white rounded-lg">
+        <footer className="container mx-auto py-10 px-5 lg:px-32">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Company Info */}
+            <div>
+              <h3 className="text-2xl font-bold mb-3">ERRTEKNALOZY</h3>
+              <p>Learn Skills that make you Job-Ready!</p>
+            </div>
 
-        {/* Social Media Icons */}
-        <div className="mb-6 md:mb-0">
-          <h3 className="text-xl font-bold mb-4">Follow Us</h3>
-          <div className="flex space-x-4">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xl hover:text-blue-600"
-            >
-              <FaFacebook />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xl hover:text-blue-400"
-            >
-              <FaTwitter />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xl hover:text-pink-400"
-            >
-              <FaInstagram />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xl hover:text-blue-700"
-            >
-              <FaLinkedin />
-            </a>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xl hover:text-gray-400"
-            >
-              <FaGithub />
-            </a>
+            {/* Contact Info */}
+            <div>
+              <h3 className="text-xl font-bold mb-3">Get In Touch</h3>
+              <div className="flex items-center mb-2">
+                <MdLocationOn className="mr-2" />
+                <p>
+                  235, 13th Cross Rd, Indira Nagar, Bengaluru, Karnataka 560038
+                </p>
+              </div>
+              <div className="flex items-center mb-2">
+                <MdEmail className="mr-2" />
+                <p>support@.com</p>
+              </div>
+              <div className="flex items-center mb-2">
+                <MdPhone className="mr-2" />
+                <p>9731910827</p>
+              </div>
+            </div>
+
+            {/* Explore Links */}
+            <div>
+              <h3 className="text-xl font-bold mb-3">Explore Links</h3>
+              <ul>
+                <li className="mb-2">
+                  <Link href="/">
+                    <span className="hover:underline cursor-pointer">
+                      Programs
+                    </span>
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link href="/about">
+                    <span className="hover:underline cursor-pointer">
+                      About Us
+                    </span>
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link href="/contact">
+                    <span className="hover:underline cursor-pointer">
+                      Contact Us
+                    </span>
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link href="/login">
+                    <span className="hover:underline cursor-pointer">
+                      Log In
+                    </span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            {/* Social Media Links */}
+            <div>
+              <h3 className="text-xl font-bold mb-3">Follow Us</h3>
+              <div className="flex space-x-4 mt-4">
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-2xl hover:text-red-600"
+                >
+                  <FaYoutube />
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-2xl hover:text-pink-500"
+                >
+                  <FaInstagram />
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-2xl hover:text-blue-700"
+                >
+                  <FaLinkedin />
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
 
-        {/* Contact Info */}
-        <div>
-          <h3 className="text-xl font-bold mb-4">Contact Us</h3>
-          <p className="flex items-center space-x-2">
-            <AiOutlineMail className="text-lg" />
-            <a href="mailto:info@example.com" className="hover:text-blue-400">
-              info@example.com
-            </a>
-          </p>
-        </div>
+          {/* Footer Bottom */}
+          <div className="border-t border-gray-700 mt-8 pt-4 text-center">
+            <p className="text-gray-400">
+              &copy; {new Date().getFullYear()} Errteknalozy Innovations. All
+              rights reserved.
+            </p>
+            <div className="flex justify-center space-x-4 mt-3">
+              <Link href="/terms">
+                <span className="hover:underline cursor-pointer">
+                  Terms & Conditions
+                </span>
+              </Link>
+              <Link href="/privacy">
+                <span className="hover:underline cursor-pointer">
+                  Privacy Policy
+                </span>
+              </Link>
+              <Link href="/refund">
+                <span className="hover:underline cursor-pointer">
+                  Refund Policy
+                </span>
+              </Link>
+            </div>
+          </div>
+        </footer>
       </div>
-
-      {/* Footer Bottom */}
-      <div className="border-t border-gray-700 mt-8 pt-4 text-center">
-        <p className="text-gray-400">
-          &copy; {new Date().getFullYear()} CompanyName. All rights reserved.
-        </p>
-      </div>
-    </footer>
+    </div>
   );
 };
 

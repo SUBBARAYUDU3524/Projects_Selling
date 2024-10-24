@@ -31,7 +31,7 @@ export default function Login() {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      router.push("/home"); // Redirect after successful Google sign-in
+      router.push("/"); // Redirect after successful Google sign-in
     } catch (error) {
       setError(error.message);
     }
@@ -88,6 +88,8 @@ export default function Login() {
               src="https://cdn-icons-png.flaticon.com/128/281/281764.png"
               alt="Google Icon"
               className="w-6 h-6 mr-8"
+              width={24} // Set the width explicitly
+              height={24} // Set the height explicitly
             />
             Sign In with Google
           </button>

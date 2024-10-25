@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Footer from "../components/Footer";
 
 const projects = [
   {
@@ -60,9 +61,9 @@ const ProjectsPage = () => {
   };
 
   return (
-    <div className="p-8 bg-gradient-to-r from-white to-blue-100 min-h-screen">
+    <div className="bg-gradient-to-r from-white to-blue-100 min-h-screen px-8 md:px-10 lg:px-32">
       {/* Search bar */}
-      <div className="flex justify-end mb-8">
+      <div className="flex justify-end py-5">
         <div className="relative">
           <input
             type="text"
@@ -144,6 +145,7 @@ const ProjectsPage = () => {
           Next
         </button>
       </div>
+      <Footer />
     </div>
   );
 };

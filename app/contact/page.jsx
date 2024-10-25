@@ -4,12 +4,13 @@ import img1 from "../contact_img.webp";
 import Image from "next/image";
 import { FiMapPin, FiPhone, FiMail, FiClock } from "react-icons/fi";
 import { motion } from "framer-motion"; // Import framer-motion for animations
+import Footer from "../components/Footer";
 
 const ContactPage = () => {
   return (
     <div className="bg-gray-900 min-h-screen">
       {/* Top Section: Background Image with Heading */}
-      <div className="relative flex flex-col items-center pt-5 pl-32 pr-32 min-h-screen bg-gray-100">
+      <div className="relative flex flex-col items-center pt-5 pl-5 pr-5 md:pl-10 md:pr-10 lg:pl-32 lg:pr-32 min-h-screen bg-gray-100">
         <div className="relative w-full h-[50vh]">
           <Image
             src={img1}
@@ -29,14 +30,14 @@ const ContactPage = () => {
         {/* Contact Details Section */}
         <div className="pt-10 pb-10">
           <motion.div
-            className="flex flex-col p-20 md:flex-row bg-black text-white min-h-screen"
+            className="flex flex-col p-5 md:p-10 bg-black text-white min-h-screen md:flex-row"
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: false, amount: 0.3 }}
           >
             {/* Left Section: Contact Information */}
-            <div className="md:w-1/2 w-full p-10 flex flex-col justify-center space-y-8 bg-black">
+            <div className="md:w-1/2 w-full p-5 flex flex-col justify-center space-y-8 bg-black">
               <h2 className="text-4xl font-bold">Always Here to Help you</h2>
               <p className="text-lg text-gray-400">
                 Rest assured that we are perpetually available and committed to
@@ -85,7 +86,7 @@ const ContactPage = () => {
             </div>
 
             {/* Right Section: Contact Form */}
-            <div className="md:w-1/2 w-full p-20 flex flex-col justify-center bg-gray-700">
+            <div className="md:w-1/2 w-full p-5 md:p-10 flex flex-col justify-center bg-gray-700">
               <h2 className="text-4xl font-bold text-white mb-6">
                 Ready To Get Started?
               </h2>
@@ -205,6 +206,7 @@ const ContactPage = () => {
             ></iframe>
           </motion.div>
         </div>
+        <Footer />
       </div>
     </div>
   );

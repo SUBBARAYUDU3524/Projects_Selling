@@ -1,18 +1,17 @@
 import React from "react";
 import Carousel from "./components/Carousel";
+import Footer from "./components/Footer";
 
 const Page = () => {
   return (
-    <div
-      style={{
-        backgroundImage: "linear-gradient(to bottom-right, white, #add8e6)", // White to light blue gradient
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: "100vh", // Full page height
-        width: "100%", // Full width
-      }}
-    >
-      <Carousel />
+    <div className="bg-gradient-to-br from-white to-blue-200 min-h-screen w-full">
+      {/* Apply the same padding (px-14) to both Carousel and Footer */}
+      <div className="px-14">
+        <Carousel />
+      </div>
+      <div className="px-14">
+        <Footer />
+      </div>
     </div>
   );
 };

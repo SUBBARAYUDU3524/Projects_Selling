@@ -5,9 +5,11 @@ import img2 from "../about2_img.jpeg"; // Add the new image for the left side
 import Image from "next/image";
 import { motion } from "framer-motion"; // Import framer-motion
 import { FaBullseye, FaEye, FaHeart } from "react-icons/fa"; // Import icons for the buttons
+import Footer from "../components/Footer";
 
 const Page = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [activeTab, setActiveTab] = useState("mission"); // Default is "mission"
   const [selectedMember, setSelectedMember] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -22,6 +24,17 @@ const Page = () => {
     hidden: { opacity: 0, x: -100 }, // Starts off-screen to the left
     visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
   };
+
+  // Determine if the screen is small
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 640); // Tailwind's sm: is 640px
+    };
+
+    handleResize(); // Check on mount
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Text content for each tab
   const contentData = {
@@ -121,7 +134,7 @@ const Page = () => {
   }, [testimonials.length]);
 
   return (
-    <div className="relative flex flex-col items-center pt-5 pl-32 pr-32 min-h-screen bg-gray-100">
+    <div className="relative flex flex-col items-center pt-5 pl-8 pr-8 md:pl-10 md:pr-10 lg:pl-32 lg:pr-32 min-h-screen bg-gray-100">
       {/* Hero Section with main image */}
       <div className="relative w-full h-[50vh]">
         <Image
@@ -298,25 +311,27 @@ const Page = () => {
       {/* Other sections (Hero, Content, Story, Testimonials) here */}
 
       {/* Our Team Section */}
+
+      {/* Our Team Section */}
       <motion.div
-        className="w-full bg-white shadow-lg rounded-lg mt-12 p-8"
+        className="w-full bg-white shadow-lg rounded-lg mt-12 p-4 sm:p-8"
         initial={{ opacity: 0, x: 100 }} // Starts off-screen to the right
         whileInView={{ opacity: 1, x: 0 }} // Slides in from the right
         transition={{ duration: 0.8, ease: "easeInOut" }}
-        viewport={{ once: false, amount: 0.3 }}
+        viewport={{ once: false, amount: isSmallScreen ? 0 : 0.3 }} // Conditional viewport
       >
         <h2 className="text-4xl font-bold text-center mb-6">Our Team</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {members.map((member, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center bg-gray-50 p-4 rounded-lg"
+              className="flex flex-col items-center bg-gray-50 p-4 sm:p-6 rounded-lg"
               initial={{ opacity: 0, x: -100 }} // Each item starts off-screen to the left
               whileInView={{ opacity: 1, x: 0 }} // Slides in from the left
               transition={{ duration: 0.5, delay: index * 0.2 }} // Staggered transition
-              viewport={{ once: true }} // Trigger only once
+              viewport={{ once: false, amount: isSmallScreen ? 0 : 0.3 }} // Conditional viewport
             >
-              <div className="relative w-32 h-32 mb-4">
+              <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-4">
                 <Image
                   src={member.img} // Use actual image
                   alt={`Team Member ${member.name}`}
@@ -325,8 +340,12 @@ const Page = () => {
                   className="rounded-full"
                 />
               </div>
-              <h3 className="text-xl font-semibold">{member.name}</h3>
-              <p className="text-gray-500">{member.role}</p>
+              <h3 className="text-lg sm:text-xl font-semibold">
+                {member.name}
+              </h3>
+              <p className="text-gray-500 text-sm sm:text-base">
+                {member.role}
+              </p>
 
               {/* View Profile Button */}
               <button
@@ -362,7 +381,7 @@ const Page = () => {
                 &times;
               </button>
               <div className="flex flex-col items-center">
-                <div className="relative w-32 h-32 mb-4">
+                <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-4">
                   <Image
                     src={selectedMember.img} // Use selected member image
                     alt={selectedMember.name}
@@ -371,16 +390,20 @@ const Page = () => {
                     className="rounded-full"
                   />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">
                   {selectedMember.name}
                 </h3>
-                <p className="text-gray-500 mb-4">{selectedMember.role}</p>
+                <p className="text-gray-500 text-sm sm:text-base mb-4">
+                  {selectedMember.role}
+                </p>
                 <p>{selectedMember.resume}</p>
               </div>
             </motion.div>
           </motion.div>
         )}
       </motion.div>
+
+      <Footer />
     </div>
   );
 };

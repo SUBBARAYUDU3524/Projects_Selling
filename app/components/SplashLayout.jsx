@@ -1,7 +1,6 @@
 "use client"; // Client-side code for splash screen and layout
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 
 const SplashScreen = () => {
   return (
@@ -57,7 +56,6 @@ const SplashLayout = ({ children }) => {
           <main className="min-h-screen w-full bg-gray-100 text-gray-900">
             {children} {/* Page content */}
           </main>
-          <Footer /> {/* Footer will display after splash screen */}
         </>
       )}
     </>

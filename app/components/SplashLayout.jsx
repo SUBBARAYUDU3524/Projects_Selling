@@ -14,7 +14,7 @@ const SplashScreen = () => {
       }}
     >
       <h1
-        className="text-9xl font-bold"
+        className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold"
         style={{
           animation: "fadeIn 2s ease-in-out, bounceIn 2s ease-out",
           // Adding keyframes directly in style
@@ -39,7 +39,7 @@ const SplashLayout = ({ children }) => {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    // Set a 5-second timeout for the splash screen
+    // Set a 3-second timeout for the splash screen
     const timer = setTimeout(() => setShowSplash(false), 3000);
 
     // Clean up the timer when the component unmounts
@@ -53,7 +53,7 @@ const SplashLayout = ({ children }) => {
       ) : (
         <>
           <Navbar /> {/* Navbar will display after the splash screen */}
-          <main className="min-h-screen w-full bg-gray-100 text-gray-900">
+          <main className="min-h-screen w-full bg-gray-100 text-gray-900 p-4 sm:p-6 lg:p-8">
             {children} {/* Page content */}
           </main>
         </>

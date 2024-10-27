@@ -27,23 +27,25 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="relative w-[90vw] h-[60vh] mx-auto overflow-hidden pt-3">
+    <div className="relative w-full md:w-3/4 lg:w-[90vw] h-60 sm:h-80 md:h-[60vh] lg:h-[60vh] mx-auto overflow-hidden pt-3">
       <div
         className="flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {images.map((image, index) => (
-          <div key={index} className="flex-shrink-0 w-full h-full">
+          <div key={index} className="relative flex-shrink-0 w-full h-full">
             <Image
-              src="https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&w=600"
-              alt="Scarlet Honeyeater Bird"
-              width={600} // specify the width
-              height={400} // specify the height
-              className="w-full h-96 object-cover rounded-t-lg"
+              src={image}
+              alt={`Carousel image ${index + 1}`}
+              fill // Use fill instead of layout="fill"
+              className="rounded-lg object-cover" // Use object-cover directly in className
+              priority // Improves loading performance
             />
           </div>
         ))}
       </div>
+
+      {/* Navigation Arrows */}
       <div className="absolute top-1/2 left-0 transform -translate-y-1/2 flex justify-between w-full px-4">
         <button
           onClick={handlePrev}
@@ -58,7 +60,9 @@ const Carousel = () => {
           &gt;
         </button>
       </div>
-      <div className="absolute -mt-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
+
+      {/* Indicators */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {images.map((_, index) => (
           <div
             key={index}

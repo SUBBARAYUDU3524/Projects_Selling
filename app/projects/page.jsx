@@ -4,6 +4,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Footer from "../components/Footer";
+import { motion } from "framer-motion"; // Import framer-motion
 
 const projects = [
   {
@@ -13,21 +14,33 @@ const projects = [
     name: "Project 1",
     amount: "$000",
   },
+  {
+    id: 2,
+    image:
+      "https://media.istockphoto.com/id/1464561797/photo/artificial-intelligence-processor-unit-powerful-quantum-ai-component-on-pcb-motherboard-with.webp?a=1&b=1&s=612x612&w=0&k=20&c=vrhk6luVn4qRdKFVNokuABLpPrVmM6cKODfNv_74dHQ=",
+    name: "lroject 2",
+    amount: "$2000",
+  },
+  {
+    id: 3,
+    image:
+      "https://media.istockphoto.com/id/1464561797/photo/artificial-intelligence-processor-unit-powerful-quantum-ai-component-on-pcb-motherboard-with.webp?a=1&b=1&s=612x612&w=0&k=20&c=vrhk6luVn4qRdKFVNokuABLpPrVmM6cKODfNv_74dHQ=",
+    name: "mroject 2",
+    amount: "$2000",
+  },
   // Add more projects if necessary
 ];
 
 const ProjectsPage = () => {
-  const router = useRouter(); // Initialize useRouter hook
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const projectsPerPage = 8;
 
-  // Filter projects based on search term
   const filteredProjects = projects.filter((project) =>
     project.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Pagination calculations
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
   const currentProjects = filteredProjects.slice(
@@ -55,15 +68,14 @@ const ProjectsPage = () => {
     }
   };
 
-  // Navigate to project details page
   const navigateToProject = () => {
-    router.push("/projectdetails"); // Update with the correct path for your project details page
+    router.push("/projectdetails");
   };
 
   return (
-    <div className="bg-gradient-to-r from-white to-blue-100 min-h-screen px-8 md:px-10 lg:px-32">
+    <div className="bg-gradient-to-r from-white to-blue-100 min-h-screen">
       {/* Search bar */}
-      <div className="flex justify-end py-5">
+      <div className="flex justify-end py-5 px-4 sm:px-8 md:px-10 lg:px-32">
         <div className="relative">
           <input
             type="text"
@@ -79,28 +91,37 @@ const ProjectsPage = () => {
       </div>
 
       {/* Projects Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-14">
-        {currentProjects.map((project) => (
-          <div
-            key={project.id}
-            onClick={navigateToProject} // Use navigateToProject function
-            className="bg-white p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer"
-          >
-            <Image
-              src={project.image}
-              alt={project.name}
-              width={960}
-              height={540}
-              className="w-full h-96 object-cover rounded-t-lg"
-            />
-            <div className="mt-4 flex justify-between items-center">
-              <h3 className="text-xl font-semibold">{project.name}</h3>
-              <p className="text-green-500 text-lg font-semibold">
-                {project.amount}
-              </p>
-            </div>
-          </div>
-        ))}
+      <div className="bg-blue-50 px-4 sm:px-8 md:px-10 lg:px-32 py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-14">
+          {currentProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              onClick={navigateToProject}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }} // Trigger at 30% visibility
+              variants={{
+                hidden: { opacity: 0, x: index % 2 === 0 ? -100 : 100 },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+              }}
+              className="bg-white p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer"
+            >
+              <Image
+                src={project.image}
+                alt={project.name}
+                width={960}
+                height={540}
+                className="w-full h-96 object-cover rounded-t-lg"
+              />
+              <div className="mt-4 flex justify-between items-center">
+                <h3 className="text-xl font-semibold">{project.name}</h3>
+                <p className="text-green-500 text-lg font-semibold">
+                  {project.amount}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* Pagination Controls */}
@@ -145,6 +166,8 @@ const ProjectsPage = () => {
           Next
         </button>
       </div>
+
+      {/* Footer */}
       <Footer />
     </div>
   );

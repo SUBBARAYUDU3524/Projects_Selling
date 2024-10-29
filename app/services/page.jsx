@@ -1,18 +1,24 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   FaLaptopCode,
   FaRocket,
   FaPaintBrush,
   FaChartLine,
 } from "react-icons/fa"; // Import icons
+
+import getInTouch from "../images/get in touch.jpeg";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import Footer from "../components/Footer";
-import { motion } from "framer-motion"; // Import framer-motion
+import { motion, AnimatePresence } from "framer-motion"; // Import framer-motion
 import chooseImg from "../images/WhyChooseUS.jpeg";
 import Image from "next/image";
+import ThemeContext from "../ThemeContext";
 
 const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(0);
+  const { theme } = useContext(ThemeContext);
 
   const testimonials = [
     {
@@ -38,6 +44,25 @@ const Services = () => {
     },
   ];
 
+  const faqs = [
+    {
+      question: "What makes iLander’s website design unique?",
+      answer:
+        "We emphasize user-friendly designs with high-quality graphics tailored to your brand’s needs.",
+    },
+    {
+      question: "How long does it take to build a website?",
+      answer:
+        "Our development timeline varies depending on project complexity. Most projects take 4-8 weeks from start to finish.",
+    },
+    // Add more FAQs as needed
+  ];
+
+  const toggleFAQ = (index) => {
+    // Set the clicked question as open, and close the previous one
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   useEffect(() => {
     // Automatically change testimonials every 5 seconds
     const interval = setInterval(() => {
@@ -50,10 +75,16 @@ const Services = () => {
   const { image, text, name, role, rating } = testimonials[currentIndex];
 
   return (
-    <div className="min-h-screen  flex flex-col items-center py-10 px-4 md:px-10 lg:px-32 lg:text-lg">
+    <div
+      className={`min-h-screen  flex flex-col items-center py-10 px-4 md:px-10 lg:px-32 lg:text-lg ${
+        theme === "dark"
+          ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+          : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
+      }`}
+    >
       {/* Header */}
 
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-700 mb-10 ">
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold  mb-10 ">
         Our Services
       </h2>
 
@@ -66,7 +97,7 @@ const Services = () => {
           hidden: { opacity: 0, x: -50 }, // Change x value as needed
           visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
         }}
-        className="bg-white p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer w-full text-center mx-auto"
+        className=" p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer w-full text-center mx-auto"
       >
         <div className="relative w-full max-w-4xl mx-auto my-5">
           {/* Vertical Line for desktop */}
@@ -187,24 +218,26 @@ const Services = () => {
 
       {/* Why Choose Us */}
 
-      <div className="bg-white py-6 px-4 rounded-lg shadow-md my-10 w-full flex flex-col md:flex-row">
+      <div
+        className={`py-6 px-4 rounded-lg shadow-md my-10 w-full flex flex-col md:flex-row transform transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+          theme === "dark"
+            ? "text-gray-200 bg-gray-800"
+            : "text-gray-600 bg-white"
+        }`}
+      >
         {/* Image on the left */}
         <div className="w-full md:w-1/3 mb-4 md:mb-0">
-          {" "}
-          {/* Adjust margins for small screens */}
           <Image
             src={chooseImg} // Replace with your image source
             alt="Description of the image"
-            className="w-full h-auto rounded-lg transform transition-transform duration-300 hover:scale-105" // Add hover effect
+            className="w-full h-auto rounded-lg transform transition-transform duration-300 hover:scale-105"
           />
         </div>
 
         {/* Text content on the right */}
         <div className="w-full md:w-2/3 pl-0 md:pl-4 lg:pt-8 lg:pl-10">
-          <h3 className="text-xl font-bold text-blue-700 mb-4 text-left">
-            Why Choose Us?
-          </h3>
-          <p className="text-gray-600 text-left">
+          <h3 className="text-2xl font-bold mb-4 text-left">Why Choose Us?</h3>
+          <p className="text-left text-base md:text-lg leading-relaxed">
             Our team is dedicated to delivering innovative and impactful
             solutions for all your digital needs. We prioritize customer
             satisfaction, quality, and timely delivery.
@@ -246,43 +279,114 @@ const Services = () => {
       </div>
 
       {/* FAQ Section */}
-      <div className="my-10 w-full max-w-4xl">
-        <h3 className="text-xl font-bold text-blue-700 mb-4">
+      <div
+        className={`my-10 w-full max-w-4xl p-6 rounded-lg shadow-lg ${
+          theme === "dark"
+            ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+            : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
+        }`}
+      >
+        <h3 className="text-2xl font-bold text-blue-700 mb-6 text-center">
           Frequently Asked Questions
         </h3>
-        <div className="mb-4">
-          <h4 className="text-lg font-semibold">
-            What makes iLander’s website design unique?
-          </h4>
-          <p className="text-gray-600">
-            We emphasize user-friendly designs with high-quality graphics
-            tailored to your brand’s needs.
-          </p>
-        </div>
-        <div>
-          <h4 className="text-lg font-semibold">
-            How long does it take to build a website?
-          </h4>
-          <p className="text-gray-600">
-            Our development timeline varies depending on project complexity.
-            Most projects take 4-8 weeks from start to finish.
-          </p>
-        </div>
+        {faqs.map((faq, index) => (
+          <motion.div
+            key={index}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={{
+              hidden: { opacity: 0, x: -50 },
+              visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+            }}
+            className="mb-4 border-b border-gray-300 pb-4"
+          >
+            <div
+              onClick={() => toggleFAQ(index)}
+              className="flex justify-between items-center cursor-pointer"
+            >
+              <h4 className="text-lg font-semibold">{faq.question}</h4>
+              {openIndex === index ? (
+                <FiChevronUp className="text-blue-700" />
+              ) : (
+                <FiChevronDown className="text-blue-700" />
+              )}
+            </div>
+            <AnimatePresence>
+              {openIndex === index && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="overflow-hidden"
+                >
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.4 }}
+                    className="mt-2 text-gray-600 dark:text-gray-400"
+                  >
+                    {faq.answer}
+                  </motion.p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
       </div>
 
       {/* Call-to-Action (CTA) */}
-      <div className="bg-blue-100 p-6 mt-10 rounded-lg text-center">
-        <h3 className="text-xl font-bold text-blue-700">
-          Ready to elevate your brand?
-        </h3>
-        <p className="text-gray-600 mt-2">
-          Get in touch with us today to discover how we can help you reach your
-          goals.
-        </p>
-        <button className="mt-4 px-6 py-2 bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-600">
-          Contact Us
-        </button>
-      </div>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={{
+          hidden: { opacity: 0, x: -50 },
+          visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+        }}
+        className={`my-10 w-full p-6 rounded-lg shadow-lg flex items-center ${
+          theme === "dark"
+            ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+            : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
+        }`}
+      >
+        {/* Image with hover effect */}
+        <div className="flex-shrink-0 w-1/3 overflow-hidden rounded-lg mr-6">
+          <motion.div
+            className="transition-transform duration-300 hover:scale-105"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Image
+              src={getInTouch} // Image source
+              alt="Elevate your brand"
+              width={300} // Specify width
+              height={300} // Specify height
+              layout="responsive" // Ensures responsive layout
+              className="rounded-lg object-cover"
+            />
+          </motion.div>
+        </div>
+
+        {/* Text content */}
+        <div className="w-2/3">
+          <h3 className="text-2xl font-bold text-blue-700">
+            Ready to elevate your brand?
+          </h3>
+          <p className="text-gray-600 mt-2 dark:text-gray-400">
+            Discover how our team of experts can help you achieve your goals.
+            Partner with us to enhance your brand's visibility, engage your
+            audience, and take your business to the next level. We're here to
+            provide creative solutions tailored just for you.
+          </p>
+          <button className="mt-4 px-6 py-2 bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-600">
+            Contact Us
+          </button>
+        </div>
+      </motion.div>
 
       {/* Footer */}
       <Footer />

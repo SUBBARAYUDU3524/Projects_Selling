@@ -1,11 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import img1 from "../about_img.webp";
 import img2 from "../about2_img.jpeg"; // Add the new image for the left side
 import Image from "next/image";
 import { motion } from "framer-motion"; // Import framer-motion
 import { FaBullseye, FaEye, FaHeart } from "react-icons/fa"; // Import icons for the buttons
 import Footer from "../components/Footer";
+import ThemeContext from "../ThemeContext";
 
 const Page = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -13,6 +14,7 @@ const Page = () => {
   const [activeTab, setActiveTab] = useState("mission"); // Default is "mission"
   const [selectedMember, setSelectedMember] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { theme } = useContext(ThemeContext);
 
   // Framer motion variants for sliding animations
   const slideInRight = {
@@ -134,7 +136,13 @@ const Page = () => {
   }, [testimonials.length]);
 
   return (
-    <div className="relative flex flex-col items-center pt-5 pl-8 pr-8 md:pl-10 md:pr-10 lg:pl-32 lg:pr-32 min-h-screen bg-gray-100">
+    <div
+      className={`relative flex flex-col items-center pt-5 pl-8 pr-8 md:pl-10 md:pr-10 lg:pl-32 lg:pr-32 min-h-screen ${
+        theme === "dark"
+          ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+          : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
+      }`}
+    >
       {/* Hero Section with main image */}
       <div className="relative w-full h-[50vh]">
         <Image
@@ -154,7 +162,9 @@ const Page = () => {
 
       {/* Content Section with image on left and content on right */}
       <motion.div
-        className="flex flex-col lg:flex-row items-center justify-center bg-white shadow-lg rounded-lg overflow-hidden mt-12 p-8"
+        className={`flex flex-col lg:flex-row items-center justify-center shadow-lg rounded-lg overflow-hidden mt-12 p-8 ${
+          theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-900"
+        }`}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -191,7 +201,11 @@ const Page = () => {
           </motion.h2>
 
           <motion.p
-            className="text-gray-600 text-lg leading-relaxed"
+            className={`text-lg leading-relaxed ${
+              theme === "dark"
+                ? "bg-gray-800 text-white"
+                : "bg-white text-gray-900"
+            }`}
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6, ease: "easeInOut" }}
@@ -239,7 +253,9 @@ const Page = () => {
           {/* Dynamic Text Content with Transition */}
           <motion.p
             key={activeTab}
-            className="text-gray-600 text-lg leading-relaxed"
+            className={`text-gray-600 text-lg leading-relaxed ${
+              theme === "dark" ? "text-white" : "text-gray-600"
+            }`}
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
@@ -254,7 +270,11 @@ const Page = () => {
       <motion.div className="w-full mt-12 space-y-8">
         {/* Our Story Card */}
         <motion.div
-          className="bg-white shadow-lg rounded-lg p-8 flex flex-col lg:flex-row items-center"
+          className={` shadow-lg rounded-lg p-8 flex flex-col lg:flex-row items-center ${
+            theme === "dark"
+              ? "bg-gray-800 text-white"
+              : "bg-white text-gray-900"
+          }`}
           initial={{ opacity: 0, x: 100 }} // Starts from the right
           whileInView={{ opacity: 1, x: 0 }} // Moves into view when visible on screen
           transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -263,7 +283,7 @@ const Page = () => {
           {/* Left Side - Text */}
           <div className="lg:w-1/2">
             <h2 className="text-4xl font-bold mb-6">Our Story</h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className=" text-lg leading-relaxed">
               Established in [Year], we began as a small team of passionate
               developers. Over the years, we have grown into a dynamic team,
               working with clients across industries, delivering top-notch web
@@ -291,7 +311,11 @@ const Page = () => {
 
         {/* Testimonials Card */}
         <motion.div
-          className="bg-white shadow-lg rounded-lg p-8"
+          className={`shadow-lg rounded-lg p-8 ${
+            theme === "dark"
+              ? "bg-gray-800 text-white"
+              : "bg-white text-gray-900"
+          }`}
           initial={{ opacity: 0, y: 100 }} // Start from below
           whileInView={{ opacity: 1, y: 0 }} // Moves up when in view
           transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -300,7 +324,7 @@ const Page = () => {
           <h2 className="text-4xl font-bold text-center mb-6">
             What Clients Say
           </h2>
-          <p className="text-gray-600 text-lg leading-relaxed text-center">
+          <p className="text-lg leading-relaxed text-center">
             {testimonials[currentTestimonial]}
           </p>
         </motion.div>
@@ -314,26 +338,30 @@ const Page = () => {
 
       {/* Our Team Section */}
       <motion.div
-        className="w-full bg-white shadow-lg rounded-lg mt-12 p-4 sm:p-8"
-        initial={{ opacity: 0, x: 100 }} // Starts off-screen to the right
-        whileInView={{ opacity: 1, x: 0 }} // Slides in from the right
+        className={`w-full shadow-lg rounded-lg mt-12 p-4 sm:p-8 ${
+          theme === "dark"
+            ? "text-gray-200 bg-gray-800"
+            : "text-gray-600 bg-white"
+        }`}
+        initial={{ opacity: 0, x: 100 }}
+        whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, ease: "easeInOut" }}
-        viewport={{ once: false, amount: isSmallScreen ? 0 : 0.3 }} // Conditional viewport
+        viewport={{ once: false, amount: isSmallScreen ? 0 : 0.3 }}
       >
         <h2 className="text-4xl font-bold text-center mb-6">Our Team</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {members.map((member, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center bg-gray-50 p-4 sm:p-6 rounded-lg"
-              initial={{ opacity: 0, x: -100 }} // Each item starts off-screen to the left
-              whileInView={{ opacity: 1, x: 0 }} // Slides in from the left
-              transition={{ duration: 0.5, delay: index * 0.2 }} // Staggered transition
-              viewport={{ once: false, amount: isSmallScreen ? 0 : 0.3 }} // Conditional viewport
+              className="flex flex-col items-center p-4 sm:p-6 rounded-lg"
+              initial={{ opacity: 0, x: -100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              viewport={{ once: false, amount: isSmallScreen ? 0 : 0.3 }}
             >
               <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-4">
                 <Image
-                  src={member.img} // Use actual image
+                  src={member.img}
                   alt={`Team Member ${member.name}`}
                   layout="fill"
                   objectFit="cover"
@@ -343,11 +371,7 @@ const Page = () => {
               <h3 className="text-lg sm:text-xl font-semibold">
                 {member.name}
               </h3>
-              <p className="text-gray-500 text-sm sm:text-base">
-                {member.role}
-              </p>
-
-              {/* View Profile Button */}
+              <p className="text-sm sm:text-base">{member.role}</p>
               <button
                 className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition ease-in-out duration-300"
                 onClick={() => openDialog(member)}
@@ -383,7 +407,7 @@ const Page = () => {
               <div className="flex flex-col items-center">
                 <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-4">
                   <Image
-                    src={selectedMember.img} // Use selected member image
+                    src={selectedMember.img}
                     alt={selectedMember.name}
                     layout="fill"
                     objectFit="cover"

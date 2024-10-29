@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Link from "next/link";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import {
@@ -15,17 +15,27 @@ import {
   FaSun,
 } from "react-icons/fa"; // Added FaBars and FaTimes for mobile toggle
 import Image from "next/image";
+
 import { auth } from "../firebaseConfig";
 import { useRouter } from "next/navigation";
+import ThemeContext from "../ThemeContext";
+import { motion, AnimatePresence } from "framer-motion"; // Import framer-motion for animations
 
 const Navbar = () => {
   const router = useRouter();
   const [activeLink, setActiveLink] = useState("home");
   const [user, setUser] = useState(null);
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // For mobile menu
   const modalRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      setIsModalOpen(false); // Close modal when clicking outside
+    }
+  };
 
   // Check the authentication state and set the current user
   useEffect(() => {
@@ -55,11 +65,6 @@ const Navbar = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const toggleTheme = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-    // Optionally, you can add logic to set the theme in local storage or apply body class
-  };
-
   // Close modal when clicking outside of it
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -70,6 +75,8 @@ const Navbar = () => {
 
     if (isModalOpen) {
       document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
@@ -83,72 +90,57 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white text-gray-900 py-6 px-8 shadow-md sticky top-0 z-50">
+    <nav
+      className={`bg-white text-gray-900 py-6 px-8 shadow-md sticky top-0 z-50 ${
+        theme === "dark"
+          ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+          : "bg-white text-gray-900"
+      }`}
+    >
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-3xl font-bold text-gray-900">
+        <div className="text-3xl font-bold ">
           <Link href="/">ERRTEKNALOZY</Link>
         </div>
 
         {/* Desktop Menu - Show on Large Screens */}
-        <div className="hidden md:flex space-x-8 items-center">
-          <Link href="/">
-            <span
-              className={`text-xl font-semibold ${
-                activeLink === "home" ? "text-blue-400" : "text-gray-900"
-              }`}
-              onClick={() => setActiveLink("home")}
-            >
-              Home
-            </span>
-          </Link>
-          <Link href="/about">
-            <span
-              className={`text-xl font-semibold ${
-                activeLink === "about" ? "text-blue-400" : "text-gray-900"
-              }`}
-              onClick={() => setActiveLink("about")}
-            >
-              About Us
-            </span>
-          </Link>
-          <Link href="/services">
-            <span
-              className={`text-xl font-semibold ${
-                activeLink === "services" ? "text-blue-400" : "text-gray-900"
-              }`}
-              onClick={() => setActiveLink("services")}
-            >
-              Services
-            </span>
-          </Link>
-          <Link href="/projects">
-            <span
-              className={`text-xl font-semibold ${
-                activeLink === "projects" ? "text-blue-400" : "text-gray-900"
-              }`}
-              onClick={() => setActiveLink("projects")}
-            >
-              Projects
-            </span>
-          </Link>
-          <Link href="/contact">
-            <span
-              className={`text-xl font-semibold ${
-                activeLink === "contact" ? "text-blue-400" : "text-gray-900"
-              }`}
-              onClick={() => setActiveLink("contact")}
-            >
-              Contact Us
-            </span>
-          </Link>
+        <div className="hidden md:flex space-x-8 items-center relative">
+          {/* Navigation Links */}
+          {["home", "about", "services", "projects", "contact"].map((link) => (
+            <Link href={link === "home" ? "/" : `/${link}`} key={link}>
+              <span
+                className={`text-xl font-semibold ${
+                  activeLink === link
+                    ? theme === "dark"
+                      ? "text-blue-400" // Active link color in dark theme
+                      : "text-blue-600" // Active link color in light theme
+                    : theme === "dark"
+                    ? "text-white" // Inactive link color in dark theme
+                    : "text-gray-900" // Inactive link color in light theme
+                }`}
+                onClick={() => setActiveLink(link)}
+              >
+                {link.charAt(0).toUpperCase() + link.slice(1).replace("-", " ")}
+              </span>
+            </Link>
+          ))}
 
-          {/* User Profile or Login */}
+          {/* Theme Toggle Button */}
+          <button onClick={toggleTheme} className="text-2xl">
+            {theme === "dark" ? (
+              <FaSun className="text-yellow-400" />
+            ) : (
+              <FaMoon className="text-gray-800" />
+            )}
+          </button>
+
+          {/* User Profile */}
           {user ? (
-            <div className="flex items-center space-x-4">
+            <div className="relative">
+              {/* Profile Image */}
               <Image
                 onClick={toggleModal}
                 src={
-                  user?.photoURL ||
+                  user.photoURL ||
                   "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
                 }
                 alt="User Avatar"
@@ -156,14 +148,39 @@ const Navbar = () => {
                 width={40}
                 height={40}
               />
-              <span className="text-xl">{user?.displayName || "User"}</span>
 
-              <button
-                onClick={handleLogout}
-                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors duration-300"
-              >
-                Logout
-              </button>
+              {/* Modal positioned from the right end */}
+              <AnimatePresence>
+                {isModalOpen && (
+                  <motion.div
+                    ref={modalRef} // Attach the ref here
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 10 }}
+                    className={`absolute right-0 top-0 mt-16 w-72 p-4 rounded-lg shadow-lg text-center z-10 ${
+                      theme === "dark"
+                        ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+                        : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
+                    }`}
+                  >
+                    <Image
+                      src={user.photoURL}
+                      alt="User Avatar"
+                      className="w-16 h-16 rounded-full mx-auto mb-4"
+                      width={64}
+                      height={64}
+                    />
+                    <p className="text-xl font-semibold">{user.displayName}</p>
+                    <p className="text-sm mt-2 break-words">{user.email}</p>
+                    <button
+                      onClick={handleLogout}
+                      className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition-colors duration-300"
+                    >
+                      Logout
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ) : (
             <Link href="/login">
@@ -195,22 +212,25 @@ const Navbar = () => {
           className={`fixed inset-0 transform ${
             isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform duration-300 ease-in-out z-40 md:hidden ${
-            isDarkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+            theme === "dark"
+              ? "bg-gray-900 text-white"
+              : "bg-white text-gray-900"
           } w-[80%] md:w-[40%]`} // Set width to 80% on small screens, 50% on medium screens
         >
           <div className="flex flex-col  h-full px-8 py-6 overflow-y-auto">
             {/* Theme Toggle Button in Blue Background */}
+
             <div className="flex justify-end  bg-blue-500 p-2 ">
               <button onClick={toggleTheme} className="text-2xl">
-                {isDarkMode ? (
-                  <FaSun className="text-white" /> // White Sun in Dark Mode
+                {theme === "dark" ? (
+                  <FaSun className="text-yellow-400" />
                 ) : (
-                  <FaMoon className="text-gray-800" /> // Dark Moon in Light Mode
+                  <FaMoon className="text-gray-800" />
                 )}
               </button>
             </div>
             {/* User Profile Section */}
-            <div className="bg-blue-500 text-white p-4  mb-4">
+            <div className="bg-blue-500 p-4  mb-4">
               {" "}
               {/* Different color for user section */}
               {user ? (
@@ -229,6 +249,7 @@ const Navbar = () => {
                     height={64}
                   />
                   <span className="text-xl">{user?.displayName || "User"}</span>
+                  <span className="text-md">{user?.email || "User"}</span>
                   <button
                     onClick={handleLogout}
                     className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-300"
@@ -257,7 +278,7 @@ const Navbar = () => {
                   className={`flex items-center py-4 text-xl md:text-2xl font-semibold ${
                     activeLink === "home"
                       ? "text-blue-400"
-                      : isDarkMode
+                      : theme === "dark"
                       ? "text-white" // White text in dark mode
                       : "text-gray-900"
                   }`}
@@ -275,7 +296,7 @@ const Navbar = () => {
                   className={`flex items-center py-4 text-xl md:text-2xl font-semibold ${
                     activeLink === "about"
                       ? "text-blue-400"
-                      : isDarkMode
+                      : theme === "dark"
                       ? "text-white" // White text in dark mode
                       : "text-gray-900"
                   }`}
@@ -294,7 +315,7 @@ const Navbar = () => {
                   className={`flex items-center py-4 text-xl md:text-2xl font-semibold ${
                     activeLink === "services"
                       ? "text-blue-400"
-                      : isDarkMode
+                      : theme === "dark"
                       ? "text-white" // White text in dark mode
                       : "text-gray-900"
                   }`}
@@ -313,7 +334,7 @@ const Navbar = () => {
                   className={`flex items-center py-4 text-xl md:text-2xl font-semibold ${
                     activeLink === "projects"
                       ? "text-blue-400"
-                      : isDarkMode
+                      : theme === "dark"
                       ? "text-white" // White text in dark mode
                       : "text-gray-900"
                   }`}
@@ -333,7 +354,7 @@ const Navbar = () => {
                   className={`flex items-center py-4 text-xl md:text-2xl font-semibold ${
                     activeLink === "contact"
                       ? "text-blue-400"
-                      : isDarkMode
+                      : theme === "dark"
                       ? "text-white" // White text in dark mode
                       : "text-gray-900"
                   }`}

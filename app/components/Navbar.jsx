@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef, useContext } from "react";
 import Link from "next/link";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebaseConfig";
+import { signOut } from "firebase/auth";
 import {
   FaEdit,
   FaBars,
@@ -16,20 +17,19 @@ import {
 } from "react-icons/fa"; // Added FaBars and FaTimes for mobile toggle
 import Image from "next/image";
 
-import { auth } from "../firebaseConfig";
 import { useRouter } from "next/navigation";
 import ThemeContext from "../ThemeContext";
 import { motion, AnimatePresence } from "framer-motion"; // Import framer-motion for animations
+import UserContext from "../UserContext";
 
 const Navbar = () => {
   const router = useRouter();
   const [activeLink, setActiveLink] = useState("home");
-  const [user, setUser] = useState(null);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // For mobile menu
   const modalRef = useRef(null);
+  const { currentUser } = useContext(UserContext);
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -38,22 +38,11 @@ const Navbar = () => {
   };
 
   // Check the authentication state and set the current user
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        setUser(currentUser);
-      } else {
-        setUser(null); // User is not logged in
-      }
-    });
-    return () => unsubscribe();
-  }, []);
 
   // Handle user sign out
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      setUser(null); // After signing out, clear the user state
       router.push("/login");
     } catch (error) {
       console.error("Error logging out:", error);
@@ -62,21 +51,20 @@ const Navbar = () => {
 
   // Toggle modal visibility
   const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+    setIsModalOpen((prevState) => !prevState);
+    console.log("Modal state after toggle:", !isModalOpen);
   };
 
   // Close modal when clicking outside of it
   useEffect(() => {
-    const handleOutsideClick = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
+    const handleOutsideClick = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
         setIsModalOpen(false);
       }
     };
 
     if (isModalOpen) {
       document.addEventListener("mousedown", handleOutsideClick);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
@@ -134,13 +122,13 @@ const Navbar = () => {
           </button>
 
           {/* User Profile */}
-          {user ? (
+          {currentUser ? (
             <div className="relative">
               {/* Profile Image */}
               <Image
-                onClick={toggleModal}
+                onClick={toggleModal} // Open modal on click
                 src={
-                  user.photoURL ||
+                  currentUser?.photoURL ||
                   "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
                 }
                 alt="User Avatar"
@@ -153,7 +141,7 @@ const Navbar = () => {
               <AnimatePresence>
                 {isModalOpen && (
                   <motion.div
-                    ref={modalRef} // Attach the ref here
+                    ref={modalRef}
                     initial={{ opacity: 0, x: 10 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 10 }}
@@ -164,16 +152,23 @@ const Navbar = () => {
                     }`}
                   >
                     <Image
-                      src={user.photoURL}
+                      src={
+                        currentUser?.photoURL ||
+                        "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
+                      }
                       alt="User Avatar"
                       className="w-16 h-16 rounded-full mx-auto mb-4"
                       width={64}
                       height={64}
                     />
-                    <p className="text-xl font-semibold">{user.displayName}</p>
-                    <p className="text-sm mt-2 break-words">{user.email}</p>
+                    <p className="text-xl font-semibold">
+                      {currentUser?.displayName}
+                    </p>
+                    <p className="text-sm mt-2 break-words">
+                      {currentUser?.email}
+                    </p>
                     <button
-                      onClick={handleLogout}
+                      onClick={handleLogout} // Define handleLogout as needed
                       className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition-colors duration-300"
                     >
                       Logout
@@ -184,14 +179,7 @@ const Navbar = () => {
             </div>
           ) : (
             <Link href="/login">
-              <span
-                className={`text-xl font-semibold ${
-                  activeLink === "login" ? "text-blue-400" : "text-gray-900"
-                }`}
-                onClick={() => setActiveLink("login")}
-              >
-                Login
-              </span>
+              <span className="text-xl font-semibold text-gray-900">Login</span>
             </Link>
           )}
         </div>
@@ -215,7 +203,7 @@ const Navbar = () => {
             theme === "dark"
               ? "bg-gray-900 text-white"
               : "bg-white text-gray-900"
-          } w-[80%] md:w-[40%]`} // Set width to 80% on small screens, 50% on medium screens
+          } w-[70%] md:w-[40%]`} // Set width to 80% on small screens, 50% on medium screens
         >
           <div className="flex flex-col  h-full px-8 py-6 overflow-y-auto">
             {/* Theme Toggle Button in Blue Background */}
@@ -233,14 +221,14 @@ const Navbar = () => {
             <div className="bg-blue-500 p-4  mb-4">
               {" "}
               {/* Different color for user section */}
-              {user ? (
+              {currentUser ? (
                 <div className="flex flex-col items-center space-y-2">
                   {" "}
                   {/* Use flex-col for vertical stacking */}
                   <Image
                     onClick={toggleModal}
                     src={
-                      user?.photoURL ||
+                      currentUser?.photoURL ||
                       "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
                     }
                     alt="User Avatar"
@@ -248,8 +236,12 @@ const Navbar = () => {
                     width={64}
                     height={64}
                   />
-                  <span className="text-xl">{user?.displayName || "User"}</span>
-                  <span className="text-md">{user?.email || "User"}</span>
+                  <span className="text-xl">
+                    {currentUser?.displayName || "User"}
+                  </span>
+                  <span className="text-md">
+                    {currentUser?.email || "User"}
+                  </span>
                   <button
                     onClick={handleLogout}
                     className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors duration-300"

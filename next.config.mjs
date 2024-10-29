@@ -22,7 +22,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "via.placeholder.com",
       },
-      // Add any other image domains you need
+      {
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com", // Add Firebase Storage domain
+      },
     ],
   },
 };

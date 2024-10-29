@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { auth } from "../firebaseConfig";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -21,6 +22,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Login successful! Redirecting...");
       router.push("/"); // Redirect to dashboard or another page after successful login
     } catch (error) {
       setError(error.message);
@@ -31,6 +33,7 @@ export default function Login() {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
+      toast.success("Login successful! Redirecting...");
       router.push("/"); // Redirect after successful Google sign-in
     } catch (error) {
       setError(error.message);
@@ -39,6 +42,7 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 p-6">
+      <Toaster /> {/* Add Toaster to render notifications */}
       <div className="w-full max-w-sm bg-white p-8 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">
           Login

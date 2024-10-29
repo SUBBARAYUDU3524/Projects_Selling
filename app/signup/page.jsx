@@ -6,6 +6,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Import for storage
 import { storage, db, auth } from "../firebaseConfig";
+import Link from "next/link";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function SignUp() {
   const [username, setUsername] = useState("");
@@ -52,6 +54,8 @@ export default function SignUp() {
         photoURL: imageURL, // Store the image URL in Firestore
       });
 
+      toast.success("SignUp successful! Redirecting To Login...");
+
       // Redirect to login page after successful sign-up
       router.push("/login");
     } catch (error) {
@@ -61,6 +65,7 @@ export default function SignUp() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 p-6">
+      <Toaster />
       <form
         onSubmit={handleSignUp}
         className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg"
@@ -178,6 +183,12 @@ export default function SignUp() {
         >
           Sign Up
         </button>
+        <p className="mt-4 text-center text-gray-700 text-sm">
+          Already signed up?{" "}
+          <Link href="/login" className="text-blue-600 hover:underline">
+            Please login
+          </Link>
+        </p>
       </form>
     </div>
   );

@@ -6,6 +6,7 @@ import { FiMapPin, FiPhone, FiMail, FiClock } from "react-icons/fi";
 import { motion } from "framer-motion"; // Import framer-motion for animations
 import Footer from "../components/Footer";
 import ThemeContext from "../ThemeContext";
+import Head from "next/head";
 
 const ContactPage = () => {
   const { theme } = useContext(ThemeContext);

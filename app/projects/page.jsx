@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion"; // Import framer-motion
+import Head from "next/head";
 
 const projects = [
   {

@@ -7,6 +7,7 @@ import { motion } from "framer-motion"; // Import framer-motion
 import { FaBullseye, FaEye, FaHeart } from "react-icons/fa"; // Import icons for the buttons
 import Footer from "../components/Footer";
 import ThemeContext from "../ThemeContext";
+import Head from "next/head";
 
 const Page = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);

@@ -8,6 +8,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Import f
 import { storage, db, auth } from "../firebaseConfig";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
+import Head from "next/head";
 
 export default function SignUp() {
   const [username, setUsername] = useState("");

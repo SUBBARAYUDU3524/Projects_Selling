@@ -11,6 +11,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { auth } from "../firebaseConfig";
 import toast, { Toaster } from "react-hot-toast";
+import Head from "next/head";
 
 export default function Login() {
   const [email, setEmail] = useState("");

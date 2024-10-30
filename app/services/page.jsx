@@ -14,6 +14,7 @@ import { motion, AnimatePresence } from "framer-motion"; // Import framer-motion
 import chooseImg from "../images/WhyChooseUS.jpeg";
 import Image from "next/image";
 import ThemeContext from "../ThemeContext";
+import Head from "next/head";
 
 const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

@@ -39,7 +39,7 @@ const Carousel = () => {
               alt={`Carousel image ${index + 1}`}
               fill // Use fill instead of layout="fill"
               className="rounded-lg object-cover" // Use object-cover directly in className
-              priority // Improves loading performance
+              loading="lazy"
             />
           </div>
         ))}

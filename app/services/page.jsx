@@ -75,322 +75,396 @@ const Services = () => {
   const { image, text, name, role, rating } = testimonials[currentIndex];
 
   return (
-    <div
-      className={`min-h-screen  flex flex-col items-center py-10 px-4 md:px-10 lg:px-32 lg:text-lg ${
-        theme === "dark"
-          ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
-          : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
-      }`}
-    >
-      {/* Header */}
+    <>
+      <Head>
+        {/* Primary SEO Meta Tags */}
+        <title>
+          ErrTeknalozy | Our Services - Web Development & App Solutions
+        </title>
+        <meta
+          name="description"
+          content="Explore ErrTeknalozy's comprehensive services in web development and app development, tailored to meet your business needs."
+        />
+        <meta
+          name="keywords"
+          content="ErrTeknalozy, Services, Web Development, App Development, Custom Software Solutions, E-commerce Development, Mobile App Development, Website Design, Digital Marketing, SEO Services, Technology Solutions, IT Consulting, Software Development, UI/UX Design, Cloud Services"
+        />
 
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold  mb-10 ">
-        Our Services
-      </h2>
+        {/* Open Graph Meta Tags */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://errteknalozy.netlify.app/services"
+        />
+        <meta
+          property="og:title"
+          content="ErrTeknalozy | Our Services - Web Development & App Solutions"
+        />
+        <meta
+          property="og:description"
+          content="Discover our services at ErrTeknalozy, offering expert web and app development solutions to elevate your business."
+        />
+        <meta
+          property="og:image"
+          content="https://errteknalozy.netlify.app/og-image-services.jpg"
+        />
 
-      {/* Service List */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.3 }} // Trigger at 30% visibility
-        variants={{
-          hidden: { opacity: 0, x: -50 }, // Change x value as needed
-          visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-        }}
-        className=" p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer w-full text-center mx-auto"
-      >
-        <div className="relative w-full max-w-4xl mx-auto my-5">
-          {/* Vertical Line for desktop */}
-          <div className="hidden md:block absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-gray-300"></div>
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:url"
+          content="https://errteknalozy.netlify.app/services"
+        />
+        <meta
+          name="twitter:title"
+          content="ErrTeknalozy | Our Services - Web Development & App Solutions"
+        />
+        <meta
+          name="twitter:description"
+          content="Discover our services at ErrTeknalozy, offering expert web and app development solutions to elevate your business."
+        />
+        <meta
+          name="twitter:image"
+          content="https://errteknalozy.netlify.app/twitter-image-services.jpg"
+        />
 
-          {/* Service 1 - Website Designing */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
-            variants={{
-              hidden: { opacity: 0, x: -50 },
-              visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-            }}
-            className="flex flex-col md:flex-row items-center mb-10 text-center md:text-left"
-          >
-            <div className="w-full md:w-1/2 flex justify-center md:justify-end pr-0 md:pr-10 mb-6 md:mb-0">
-              <div className="bg-pink-100 p-6 md:p-8 rounded-full">
-                <FaLaptopCode className="text-pink-500 text-3xl md:text-4xl" />
-              </div>
-            </div>
-            <div className="w-full md:w-1/2 pl-0 md:pl-10">
-              <h3 className="text-pink-500 font-bold text-lg md:text-xl">
-                WEBSITE DESIGNING
-              </h3>
-              <p className="text-gray-600 mt-2">
-                Web Design contains a website with web pages linked to each
-                other using a font or graphics-based logo, and containing text
-                and simple design graphics.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Service 2 - Website Development */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
-            variants={{
-              hidden: { opacity: 0, x: -50 },
-              visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-            }}
-            className="flex flex-col md:flex-row items-center mb-10 text-center md:text-left"
-          >
-            <div className="w-full md:w-1/2 pl-0 md:pl-10 mb-6 md:mb-0 order-last md:order-first">
-              <h3 className="text-orange-500 font-bold text-lg md:text-xl">
-                WEBSITE DEVELOPMENT
-              </h3>
-              <p className="text-gray-600 mt-2 pr-5">
-                We focus on creating dynamic websites and highlight the benefits
-                of this type of website for our clients to understand better.
-              </p>
-            </div>
-            <div className="w-full md:w-1/2 flex justify-center md:justify-start pl-0 md:pl-10">
-              <div className="bg-orange-100 p-6 md:p-8 rounded-full">
-                <FaRocket className="text-orange-500 text-3xl md:text-4xl" />
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Service 3 - Graphic Designing */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
-            variants={{
-              hidden: { opacity: 0, x: -50 },
-              visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-            }}
-            className="flex flex-col md:flex-row items-center mb-10 text-center md:text-left"
-          >
-            <div className="w-full md:w-1/2 flex justify-center md:justify-end pr-0 md:pr-10 mb-6 md:mb-0">
-              <div className="bg-green-100 p-6 md:p-8 rounded-full">
-                <FaPaintBrush className="text-green-500 text-3xl md:text-4xl" />
-              </div>
-            </div>
-            <div className="w-full md:w-1/2 pl-0 md:pl-10">
-              <h3 className="text-green-500 font-bold text-lg md:text-xl">
-                GRAPHIC DESIGNING
-              </h3>
-              <p className="text-gray-600 mt-2">
-                When it comes to logo design, we have the right approach and
-                talented designers, but this does not make a logo design
-                strategy.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Service 4 - Digital Marketing */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
-            variants={{
-              hidden: { opacity: 0, x: -50 },
-              visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-            }}
-            className="flex flex-col md:flex-row items-center mb-10 text-center md:text-left"
-          >
-            <div className="w-full md:w-1/2 pl-0 md:pl-10 mb-6 md:mb-0 order-last md:order-first">
-              <h3 className="text-teal-500 font-bold text-lg md:text-xl">
-                DIGITAL MARKETING
-              </h3>
-              <p className="text-gray-600 mt-2 pr-5">
-                At iLander, we provide expert SEO services! We understand what
-                it takes to get your business found on the web and break down
-                the art and science behind SEO.
-              </p>
-            </div>
-            <div className="w-full md:w-1/2 flex justify-center md:justify-start pl-0 md:pl-10">
-              <div className="bg-teal-100 p-6 md:p-8 rounded-full">
-                <FaChartLine className="text-teal-500 text-3xl md:text-4xl" />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Why Choose Us */}
+        {/* Structured Data (JSON-LD) */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "ErrTeknalozy Services",
+            url: "https://errteknalozy.netlify.app/services",
+            description:
+              "Explore ErrTeknalozy's services in web and app development, providing tailored solutions for modern businesses.",
+            mainEntityOfPage: {
+              "@type": "WebSite",
+              "@id": "https://errteknalozy.netlify.app",
+            },
+          })}
+        </script>
+      </Head>
 
       <div
-        className={`py-6 px-4 rounded-lg shadow-md my-10 w-full flex flex-col md:flex-row transform transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+        className={`min-h-screen  flex flex-col items-center py-10 px-4 md:px-10 lg:px-32 lg:text-lg ${
           theme === "dark"
-            ? "text-gray-200 bg-gray-800"
-            : "text-gray-600 bg-white"
+            ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+            : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
         }`}
       >
-        {/* Image on the left */}
-        <div className="w-full md:w-1/3 mb-4 md:mb-0">
-          <Image
-            src={chooseImg} // Replace with your image source
-            alt="Description of the image"
-            className="w-full h-auto rounded-lg transform transition-transform duration-300 hover:scale-105"
-          />
-        </div>
+        {/* Header */}
 
-        {/* Text content on the right */}
-        <div className="w-full md:w-2/3 pl-0 md:pl-4 lg:pt-8 lg:pl-10">
-          <h3 className="text-2xl font-bold mb-4 text-left">Why Choose Us?</h3>
-          <p className="text-left text-base md:text-lg leading-relaxed">
-            Our team is dedicated to delivering innovative and impactful
-            solutions for all your digital needs. We prioritize customer
-            satisfaction, quality, and timely delivery.
-          </p>
-        </div>
-      </div>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold  mb-10 ">
+          Our Services
+        </h2>
 
-      {/* Client Testimonials */}
-      <div className="bg-blue-600 py-6 px-4 rounded-lg shadow-md my-10 w-full flex flex-col items-center">
-        {/* Image */}
-        <div className="relative mb-4">
-          <Image
-            src={image}
-            alt={name}
-            className="w-24 h-24 rounded-full border-4 border-white object-cover"
-            width={96}
-            height={96}
-          />
-        </div>
+        {/* Service List */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }} // Trigger at 30% visibility
+          variants={{
+            hidden: { opacity: 0, x: -50 }, // Change x value as needed
+            visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+          }}
+          className=" p-4 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer w-full text-center mx-auto"
+        >
+          <div className="relative w-full max-w-4xl mx-auto my-5">
+            {/* Vertical Line for desktop */}
+            <div className="hidden md:block absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-gray-300"></div>
 
-        {/* Testimonial Text */}
-        <p className="text-white text-center px-4 mb-4">"{text}"</p>
-
-        {/* Client Name and Role */}
-        <h4 className="text-white font-bold">{name}</h4>
-        <p className="text-white">{role}</p>
-
-        {/* Star Rating */}
-        <div className="flex space-x-1 mt-2">
-          {[...Array(5)].map((_, i) => (
-            <span
-              key={i}
-              className={i < rating ? "text-yellow-400" : "text-gray-400"}
+            {/* Service 1 - Website Designing */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+              }}
+              className="flex flex-col md:flex-row items-center mb-10 text-center md:text-left"
             >
-              ★
-            </span>
+              <div className="w-full md:w-1/2 flex justify-center md:justify-end pr-0 md:pr-10 mb-6 md:mb-0">
+                <div className="bg-pink-100 p-6 md:p-8 rounded-full">
+                  <FaLaptopCode className="text-pink-500 text-3xl md:text-4xl" />
+                </div>
+              </div>
+              <div className="w-full md:w-1/2 pl-0 md:pl-10">
+                <h3 className="text-pink-500 font-bold text-lg md:text-xl">
+                  WEBSITE DESIGNING
+                </h3>
+                <p className="text-gray-600 mt-2">
+                  Web Design contains a website with web pages linked to each
+                  other using a font or graphics-based logo, and containing text
+                  and simple design graphics.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Service 2 - Website Development */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+              }}
+              className="flex flex-col md:flex-row items-center mb-10 text-center md:text-left"
+            >
+              <div className="w-full md:w-1/2 pl-0 md:pl-10 mb-6 md:mb-0 order-last md:order-first">
+                <h3 className="text-orange-500 font-bold text-lg md:text-xl">
+                  WEBSITE DEVELOPMENT
+                </h3>
+                <p className="text-gray-600 mt-2 pr-5">
+                  We focus on creating dynamic websites and highlight the
+                  benefits of this type of website for our clients to understand
+                  better.
+                </p>
+              </div>
+              <div className="w-full md:w-1/2 flex justify-center md:justify-start pl-0 md:pl-10">
+                <div className="bg-orange-100 p-6 md:p-8 rounded-full">
+                  <FaRocket className="text-orange-500 text-3xl md:text-4xl" />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Service 3 - Graphic Designing */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+              }}
+              className="flex flex-col md:flex-row items-center mb-10 text-center md:text-left"
+            >
+              <div className="w-full md:w-1/2 flex justify-center md:justify-end pr-0 md:pr-10 mb-6 md:mb-0">
+                <div className="bg-green-100 p-6 md:p-8 rounded-full">
+                  <FaPaintBrush className="text-green-500 text-3xl md:text-4xl" />
+                </div>
+              </div>
+              <div className="w-full md:w-1/2 pl-0 md:pl-10">
+                <h3 className="text-green-500 font-bold text-lg md:text-xl">
+                  GRAPHIC DESIGNING
+                </h3>
+                <p className="text-gray-600 mt-2">
+                  When it comes to logo design, we have the right approach and
+                  talented designers, but this does not make a logo design
+                  strategy.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Service 4 - Digital Marketing */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+              }}
+              className="flex flex-col md:flex-row items-center mb-10 text-center md:text-left"
+            >
+              <div className="w-full md:w-1/2 pl-0 md:pl-10 mb-6 md:mb-0 order-last md:order-first">
+                <h3 className="text-teal-500 font-bold text-lg md:text-xl">
+                  DIGITAL MARKETING
+                </h3>
+                <p className="text-gray-600 mt-2 pr-5">
+                  At iLander, we provide expert SEO services! We understand what
+                  it takes to get your business found on the web and break down
+                  the art and science behind SEO.
+                </p>
+              </div>
+              <div className="w-full md:w-1/2 flex justify-center md:justify-start pl-0 md:pl-10">
+                <div className="bg-teal-100 p-6 md:p-8 rounded-full">
+                  <FaChartLine className="text-teal-500 text-3xl md:text-4xl" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Why Choose Us */}
+
+        <div
+          className={`py-6 px-4 rounded-lg shadow-md my-10 w-full flex flex-col md:flex-row transform transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+            theme === "dark"
+              ? "text-gray-200 bg-gray-800"
+              : "text-gray-600 bg-white"
+          }`}
+        >
+          {/* Image on the left */}
+          <div className="w-full md:w-1/3 mb-4 md:mb-0">
+            <Image
+              src={chooseImg} // Replace with your image source
+              alt="Description of the image"
+              className="w-full h-auto rounded-lg transform transition-transform duration-300 hover:scale-105"
+            />
+          </div>
+
+          {/* Text content on the right */}
+          <div className="w-full md:w-2/3 pl-0 md:pl-4 lg:pt-8 lg:pl-10">
+            <h3 className="text-2xl font-bold mb-4 text-left">
+              Why Choose Us?
+            </h3>
+            <p className="text-left text-base md:text-lg leading-relaxed">
+              Our team is dedicated to delivering innovative and impactful
+              solutions for all your digital needs. We prioritize customer
+              satisfaction, quality, and timely delivery.
+            </p>
+          </div>
+        </div>
+
+        {/* Client Testimonials */}
+        <div className="bg-blue-600 py-6 px-4 rounded-lg shadow-md my-10 w-full flex flex-col items-center">
+          {/* Image */}
+          <div className="relative mb-4">
+            <Image
+              src={image}
+              alt={name}
+              className="w-24 h-24 rounded-full border-4 border-white object-cover"
+              width={96}
+              height={96}
+            />
+          </div>
+
+          {/* Testimonial Text */}
+          <p className="text-white text-center px-4 mb-4">"{text}"</p>
+
+          {/* Client Name and Role */}
+          <h4 className="text-white font-bold">{name}</h4>
+          <p className="text-white">{role}</p>
+
+          {/* Star Rating */}
+          <div className="flex space-x-1 mt-2">
+            {[...Array(5)].map((_, i) => (
+              <span
+                key={i}
+                className={i < rating ? "text-yellow-400" : "text-gray-400"}
+              >
+                ★
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div
+          className={`my-10 w-full max-w-4xl p-6 rounded-lg shadow-lg ${
+            theme === "dark"
+              ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+              : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
+          }`}
+        >
+          <h3 className="text-2xl font-bold text-blue-700 mb-6 text-center">
+            Frequently Asked Questions
+          </h3>
+          {faqs.map((faq, index) => (
+            <motion.div
+              key={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+              }}
+              className="mb-4 border-b border-gray-300 pb-4"
+            >
+              <div
+                onClick={() => toggleFAQ(index)}
+                className="flex justify-between items-center cursor-pointer"
+              >
+                <h4 className="text-lg font-semibold">{faq.question}</h4>
+                {openIndex === index ? (
+                  <FiChevronUp className="text-blue-700" />
+                ) : (
+                  <FiChevronDown className="text-blue-700" />
+                )}
+              </div>
+              <AnimatePresence>
+                {openIndex === index && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <motion.p
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.4 }}
+                      className="mt-2 text-gray-600 dark:text-gray-400"
+                    >
+                      {faq.answer}
+                    </motion.p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           ))}
         </div>
-      </div>
 
-      {/* FAQ Section */}
-      <div
-        className={`my-10 w-full max-w-4xl p-6 rounded-lg shadow-lg ${
-          theme === "dark"
-            ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
-            : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
-        }`}
-      >
-        <h3 className="text-2xl font-bold text-blue-700 mb-6 text-center">
-          Frequently Asked Questions
-        </h3>
-        {faqs.map((faq, index) => (
-          <motion.div
-            key={index}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
-            variants={{
-              hidden: { opacity: 0, x: -50 },
-              visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-            }}
-            className="mb-4 border-b border-gray-300 pb-4"
-          >
-            <div
-              onClick={() => toggleFAQ(index)}
-              className="flex justify-between items-center cursor-pointer"
+        {/* Call-to-Action (CTA) */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={{
+            hidden: { opacity: 0, x: -50 },
+            visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+          }}
+          className={`my-10 w-full p-6 rounded-lg shadow-lg flex items-center ${
+            theme === "dark"
+              ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+              : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
+          }`}
+        >
+          {/* Image with hover effect */}
+          <div className="flex-shrink-0 w-1/3 overflow-hidden rounded-lg mr-6">
+            <motion.div
+              className="transition-transform duration-300 hover:scale-105"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
             >
-              <h4 className="text-lg font-semibold">{faq.question}</h4>
-              {openIndex === index ? (
-                <FiChevronUp className="text-blue-700" />
-              ) : (
-                <FiChevronDown className="text-blue-700" />
-              )}
-            </div>
-            <AnimatePresence>
-              {openIndex === index && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className="overflow-hidden"
-                >
-                  <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.4 }}
-                    className="mt-2 text-gray-600 dark:text-gray-400"
-                  >
-                    {faq.answer}
-                  </motion.p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        ))}
+              <Image
+                src={getInTouch} // Image source
+                alt="Elevate your brand"
+                width={300} // Specify width
+                height={300} // Specify height
+                layout="responsive" // Ensures responsive layout
+                className="rounded-lg object-cover"
+              />
+            </motion.div>
+          </div>
+
+          {/* Text content */}
+          <div className="w-2/3">
+            <h3 className="text-2xl font-bold text-blue-700">
+              Ready to elevate your brand?
+            </h3>
+            <p className="text-gray-600 mt-2 dark:text-gray-400">
+              Discover how our team of experts can help you achieve your goals.
+              Partner with us to enhance your brand's visibility, engage your
+              audience, and take your business to the next level. We're here to
+              provide creative solutions tailored just for you.
+            </p>
+            <button className="mt-4 px-6 py-2 bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-600">
+              Contact Us
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Footer */}
+        <Footer />
       </div>
-
-      {/* Call-to-Action (CTA) */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.3 }}
-        variants={{
-          hidden: { opacity: 0, x: -50 },
-          visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-        }}
-        className={`my-10 w-full p-6 rounded-lg shadow-lg flex items-center ${
-          theme === "dark"
-            ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
-            : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
-        }`}
-      >
-        {/* Image with hover effect */}
-        <div className="flex-shrink-0 w-1/3 overflow-hidden rounded-lg mr-6">
-          <motion.div
-            className="transition-transform duration-300 hover:scale-105"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Image
-              src={getInTouch} // Image source
-              alt="Elevate your brand"
-              width={300} // Specify width
-              height={300} // Specify height
-              layout="responsive" // Ensures responsive layout
-              className="rounded-lg object-cover"
-            />
-          </motion.div>
-        </div>
-
-        {/* Text content */}
-        <div className="w-2/3">
-          <h3 className="text-2xl font-bold text-blue-700">
-            Ready to elevate your brand?
-          </h3>
-          <p className="text-gray-600 mt-2 dark:text-gray-400">
-            Discover how our team of experts can help you achieve your goals.
-            Partner with us to enhance your brand's visibility, engage your
-            audience, and take your business to the next level. We're here to
-            provide creative solutions tailored just for you.
-          </p>
-          <button className="mt-4 px-6 py-2 bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-600">
-            Contact Us
-          </button>
-        </div>
-      </motion.div>
-
-      {/* Footer */}
-      <Footer />
-    </div>
+    </>
   );
 };
 

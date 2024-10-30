@@ -1,4 +1,3 @@
-"use client";
 import React, { useContext } from "react";
 import Carousel from "./components/Carousel";
 import Footer from "./components/Footer";
@@ -11,6 +10,12 @@ const Page = () => {
   return (
     <>
       <Head>
+        {/* Google Site Verification Meta Tag */}
+        <meta
+          name="google-site-verification"
+          content="FNgjZTzXM-Bza4KINhZYNEyLLIwXIfDQRW_A1blyVDA"
+        />
+
         {/* Primary SEO Meta Tags */}
         <title>ErrTeknalozy | Home - Tech Solutions & Innovation</title>
         <meta

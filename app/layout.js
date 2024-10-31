@@ -47,6 +47,12 @@ export default function RootLayout({ children }) {
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />
 
+        {/* Google Site Verification Meta Tag */}
+        <meta
+          name="google-site-verification"
+          content="FNgjZTzXM-Bza4KINhZYNEyLL"
+        />
+
         {/* Open Graph Meta Tags */}
         <meta property="og:type" content={metadata.openGraph.type} />
         <meta property="og:url" content={metadata.openGraph.url} />
@@ -84,6 +90,7 @@ export default function RootLayout({ children }) {
           })}
         </script>
       </Head>
+
       <body className={inter.className}>
         <UserProvider>
           <ThemeProvider>

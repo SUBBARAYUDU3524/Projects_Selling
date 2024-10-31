@@ -11,6 +11,7 @@ export async function GET() {
     `${baseUrl}/contact`,
     `${baseUrl}/services`,
     `${baseUrl}/projects`,
+    `${baseUrl}/projectdetails`,
     `${baseUrl}/login`,
     `${baseUrl}/signup`,
     // Add other static or dynamic pages as needed

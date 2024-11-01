@@ -12,7 +12,7 @@ export const metadata = {
   description:
     "Explore ErrTeknalozy for innovative tech solutions and resources tailored to modern development needs.",
   keywords:
-    "ErrTeknalozy,error technology,error , technology, web development projects for sale, app development resources, buy web applications, purchase mobile app templates, affordable web development services, custom software solutions, project management tools, e-commerce development projects, responsive website templates, digital marketing resources, website design for startups, professional web applications, software development projects, mobile app design services, online learning platforms, technology project buying guide, best web development practices, application development solutions, innovative web projects",
+    "ErrTeknalozy, web development projects for sale, app development resources, buy web applications, purchase mobile app templates, affordable web development services, custom software solutions, project management tools, e-commerce development projects, responsive website templates, digital marketing resources, website design for startups, professional web applications, software development projects, mobile app design services, online learning platforms, technology project buying guide, best web development practices, application development solutions, innovative web projects",
   openGraph: {
     type: "website",
     url: "https://errteknalozy.netlify.app",
@@ -72,14 +72,6 @@ export default function RootLayout({ children }) {
           content={metadata.twitter.description}
         />
         <meta name="twitter:image" content={metadata.twitter.image} />
-
-        {/* Link to the new favicon */}
-        <link
-          rel="icon"
-          href="/public/favicon.ico"
-          sizes="any"
-          type="image/png"
-        />
 
         {/* Structured Data (JSON-LD for SEO) */}
         <script type="application/ld+json">

@@ -36,9 +36,10 @@ const Carousel = () => {
           <div key={index} className="relative flex-shrink-0 w-full h-full">
             <Image
               src={image}
+              width={1600}
+              height={800}
               alt={`Carousel image ${index + 1}`}
-              fill // Use fill instead of layout="fill"
-              className="rounded-lg object-cover" // Use object-cover directly in className
+              className="rounded-lg object-cover"
               loading="lazy"
             />
           </div>

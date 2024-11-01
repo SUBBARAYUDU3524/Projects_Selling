@@ -7,11 +7,11 @@ import {
   FaChartLine,
 } from "react-icons/fa"; // Import icons
 
-import getInTouch from "../images/get in touch.jpeg";
+import getInTouch from "../get in touch.jpeg";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import Footer from "../components/Footer";
 import { motion, AnimatePresence } from "framer-motion"; // Import framer-motion
-import chooseImg from "../images/WhyChooseUS.jpeg";
+import chooseImg from "../WhyChooseUS.jpeg";
 import Image from "next/image";
 import ThemeContext from "../ThemeContext";
 import Head from "next/head";

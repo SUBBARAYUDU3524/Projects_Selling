@@ -6,6 +6,7 @@ import {
   FaPaintBrush,
   FaChartLine,
 } from "react-icons/fa"; // Import icons
+import { SiGooglegemini } from "react-icons/si";
 
 import getInTouch from "../get in touch.jpeg";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
@@ -461,6 +462,15 @@ const Services = () => {
             </button>
           </div>
         </motion.div>
+        {/* Gemini Icon */}
+        <motion.a
+          href="/geminiai"
+          className="fixed right-4 bottom-4 md:bottom-8 md:right-8 bg-blue-600 p-4 rounded-full shadow-lg text-white hover:bg-blue-700 z-50"
+          whileHover={{ scale: 1.1 }}
+          title="Gemini"
+        >
+          <SiGooglegemini size={24} />
+        </motion.a>
 
         {/* Footer */}
         <Footer />

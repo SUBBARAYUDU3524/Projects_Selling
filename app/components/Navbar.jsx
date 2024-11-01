@@ -179,7 +179,7 @@ const Navbar = () => {
             </div>
           ) : (
             <Link href="/login">
-              <span className="text-xl font-semibold text-gray-900">Login</span>
+              <span className="text-xl font-semibold ">Login</span>
             </Link>
           )}
         </div>

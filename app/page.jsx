@@ -78,7 +78,7 @@ const Page = () => {
       </Head>
 
       <div
-        className={`min-h-screen w-full ${
+        className={`min-h-screen ${
           theme === "dark"
             ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
             : "bg-gradient-to-br from-white to-blue-200 text-gray-900"

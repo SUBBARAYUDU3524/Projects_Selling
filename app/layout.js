@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import SplashLayout from "./components/SplashLayout";
-import { ThemeProvider } from "./ThemeContext";
+import ThemeContext, { ThemeProvider } from "./ThemeContext";
 import { UserProvider } from "./UserContext";
 import Head from "next/head";
 

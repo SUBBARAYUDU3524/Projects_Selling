@@ -1,80 +1,89 @@
-"use client";
+import React from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// Import required modules
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
 
 const Carousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
-    "https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/1042423/pexels-photo-1042423.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/50594/sea-bay-waterfront-beach-50594.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=600",
+    {
+      src: "https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&w=600",
+      title: "Slide 1",
+      subtitle: "This is the first slide subtitle",
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.",
+    },
+    {
+      src: "https://images.pexels.com/photos/1042423/pexels-photo-1042423.jpeg?auto=compress&cs=tinysrgb&w=600",
+      title: "Slide 2",
+      subtitle: "This is the second slide subtitle",
+      text: "Sed posuere consectetur est at lobortis. Aenean lacinia bibendum nulla sed consectetur.",
+    },
+    {
+      src: "https://images.pexels.com/photos/50594/sea-bay-waterfront-beach-50594.jpeg?auto=compress&cs=tinysrgb&w=600",
+      title: "Slide 3",
+      subtitle: "This is the third slide subtitle",
+      text: "Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra.",
+    },
+    {
+      src: "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=600",
+      title: "Slide 4",
+      subtitle: "This is the fourth slide subtitle",
+      text: "Vestibulum id ligula porta felis euismod semper. Donec ullamcorper nulla non metus auctor.",
+    },
   ];
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
-    );
-  };
-
-  useEffect(() => {
-    const intervalId = setInterval(handleNext, 5000); // Change image every 5 seconds
-    return () => clearInterval(intervalId);
-  }, []);
-
   return (
-    <div className="relative w-full md:w-3/4  h-60 sm:h-80 md:h-[60vh] lg:h-[60vh] mx-auto overflow-hidden pt-3">
-      <div
-        className="flex transition-transform duration-700 ease-in-out"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
-        {images.map((image, index) => (
-          <div key={index} className="relative flex-shrink-0 w-full h-full">
+    <Swiper
+      style={{
+        "--swiper-navigation-color": "#fff",
+        "--swiper-pagination-color": "#fff",
+      }}
+      speed={600}
+      pagination={{
+        clickable: true,
+      }}
+      navigation={{
+        prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next",
+      }}
+      autoplay={{
+        delay: 5000, // 5 seconds delay
+        disableOnInteraction: false, // Allow interaction without stopping autoplay
+      }}
+      modules={[Pagination, Navigation, Autoplay]}
+      className="mySwiper relative w-full md:w-full h-[80vh] mx-auto" // Increased height
+    >
+      {images.map((image, index) => (
+        <SwiperSlide key={index}>
+          <div className="relative w-full h-full">
             <Image
-              src={image}
-              width={1600}
-              height={800}
+              src={image.src}
+              layout="fill"
+              objectFit="cover"
               alt={`Carousel image ${index + 1}`}
-              className="rounded-lg object-cover"
+              className="rounded-lg"
               loading="lazy"
             />
+            {/* Overlay Content */}
+            <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center bg-black bg-opacity-50">
+              <h2 className="text-3xl font-bold mb-2">{image.title}</h2>
+              <h3 className="text-xl mb-4">{image.subtitle}</h3>
+              <p className="px-4">{image.text}</p>
+            </div>
           </div>
-        ))}
-      </div>
-
-      {/* Navigation Arrows */}
-      <div className="absolute top-1/2 left-0 transform -translate-y-1/2 flex justify-between w-full px-4">
-        <button
-          onClick={handlePrev}
-          className="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600"
-        >
-          &lt;
-        </button>
-        <button
-          onClick={handleNext}
-          className="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600"
-        >
-          &gt;
-        </button>
-      </div>
-
-      {/* Indicators */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {images.map((_, index) => (
-          <div
-            key={index}
-            className={`w-3 h-3 rounded-full cursor-pointer ${
-              currentIndex === index ? "bg-blue-500" : "bg-gray-300"
-            }`}
-            onClick={() => setCurrentIndex(index)}
-          />
-        ))}
-      </div>
-    </div>
+        </SwiperSlide>
+      ))}
+      {/* Custom Navigation Buttons */}
+      <div className="swiper-button-prev text-white h-10 w-10 md:h-8 md:w-8 lg:h-10 lg:w-10" />
+      <div className="swiper-button-next text-white h-10 w-10 md:h-8 md:w-8 lg:h-10 lg:w-10" />
+    </Swiper>
   );
 };
 

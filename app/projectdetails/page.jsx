@@ -1,47 +1,46 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion"; // For scroll animations
+import UserContext from "../UserContext";
 
 const pages = [
   {
     id: 1,
     name: "Login Page",
-    description:
-      "This is the login page where users can access their accounts.",
-    image: "https://via.placeholder.com/300x200.png?text=Login+Page",
+    description: "loginDesc",
+    imageKey: "loginImage",
   },
   {
     id: 2,
     name: "Signup Page",
-    description: "This is the signup page where new users can register.",
-    image: "https://via.placeholder.com/300x200.png?text=Signup+Page",
+    description: "signupDesc",
+    imageKey: "signupImage",
   },
   {
     id: 3,
     name: "Homepage",
-    description: "The homepage serves as the main entry point to the site.",
-    image: "https://via.placeholder.com/300x200.png?text=Homepage",
+    description: "homeDesc",
+    imageKey: "homeImage",
   },
   {
     id: 4,
     name: "About Page",
-    description:
-      "The about page gives an overview of the website and its purpose.",
-    image: "https://via.placeholder.com/300x200.png?text=About+Page",
+    description: "aboutDesc",
+    imageKey: "aboutImage",
   },
   {
     id: 5,
     name: "Contact Page",
-    description:
-      "The contact page contains details on how users can reach out.",
-    image: "https://via.placeholder.com/300x200.png?text=Contact+Page",
+    description: "contactDesc",
+    imageKey: "contactImage",
   },
 ];
 
 const ProjectDetailsPage = () => {
-  const router = useRouter(); // Router to navigate to individual pages
+  const router = useRouter();
+  const { projectDetails } = useContext(UserContext);
 
   // Function to navigate to a particular page
   const navigateToPage = (pageName) => {
@@ -61,10 +60,24 @@ const ProjectDetailsPage = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">Project Details</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">
+        {projectDetails.name} - {projectDetails.amount}
+      </h1>
+
+      {/* Display the main project image */}
+      <div className="md:w-1/2 mb-4 md:mb-0 mx-auto">
+        <Image
+          src={projectDetails.image}
+          alt={projectDetails.name}
+          width={500}
+          height={300}
+          className="rounded-lg w-full h-auto object-cover"
+        />
+      </div>
 
       <div className="container mx-auto py-16">
         <div className="grid gap-16">
+          {/* Display project pages with images */}
           {pages.map((page, index) => (
             <motion.div
               key={page.id}
@@ -75,41 +88,44 @@ const ProjectDetailsPage = () => {
               variants={index % 2 === 0 ? leftAnimation : rightAnimation}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.5 }} // Ensure the animation occurs on scroll
+              viewport={{ once: false, amount: 0.5 }}
             >
-              {/* Image container */}
-              <div className="md:w-1/2 mb-4 md:mb-0">
-                <Image
-                  src={page.image}
-                  alt={page.name}
-                  width={500} // Increased image size
-                  height={300}
-                  className="rounded-lg w-full h-auto object-cover"
-                />
-              </div>
+              {/* Conditionally render image based on imageKey */}
+              {projectDetails[page.imageKey] ? (
+                <div className="md:w-1/2 mb-4 md:mb-0">
+                  <Image
+                    src={projectDetails[page.imageKey]}
+                    alt={page.name}
+                    width={400}
+                    height={400}
+                    className="rounded-lg object-cover"
+                  />
+                </div>
+              ) : null}
 
               {/* Text container */}
               <div className="md:w-1/2 md:px-8">
                 <h2 className="text-3xl font-semibold mb-4">{page.name}</h2>
-                <p className="text-lg text-gray-700">{page.description}</p>
+                {/* Fetch the specific description for each page */}
+                <p className="text-lg text-gray-700">
+                  {projectDetails[page.description]}
+                </p>
               </div>
             </motion.div>
           ))}
         </div>
+
         {/* Live Preview and Buy Now Buttons */}
         <div className="mt-10 flex justify-center gap-6">
-          {/* Live Preview Button */}
           <button
             className="bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-600 hover:shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out"
-            onClick={() => window.open("https://www.google.com", "_blank")} // Example route for the live preview
+            onClick={() => window.open("https://www.google.com", "_blank")}
           >
             Live Preview Of Project
           </button>
-
-          {/* Buy Now Button */}
           <button
             className="bg-green-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-600 hover:shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out"
-            onClick={() => alert("Redirecting to purchase...")} // Example Buy Now action
+            onClick={() => alert("Redirecting to purchase...")}
           >
             Buy Now
           </button>

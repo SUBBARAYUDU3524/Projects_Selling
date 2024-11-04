@@ -9,7 +9,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-
+  const [projectDetails, setProjectDetails] = useState();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
@@ -20,7 +20,9 @@ export const UserProvider = ({ children }) => {
   console.log(currentUser);
 
   return (
-    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+    <UserContext.Provider
+      value={{ currentUser, setCurrentUser, projectDetails, setProjectDetails }}
+    >
       {children}
     </UserContext.Provider>
   );

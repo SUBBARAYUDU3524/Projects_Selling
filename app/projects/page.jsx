@@ -1,11 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion"; // Import framer-motion
 import Head from "next/head";
+import UserContext from "../UserContext";
+import img11 from "../about2_img.jpeg";
+import img21 from "../contact_img.webp";
+import imag12 from "../home1.jpeg";
+import imge22 from "../about_img.webp";
 
 const projects = [
   {
@@ -13,23 +18,47 @@ const projects = [
     image:
       "https://media.istockphoto.com/id/1464561797/photo/artificial-intelligence-processor-unit-powerful-quantum-ai-component-on-pcb-motherboard-with.webp?a=1&b=1&s=612x612&w=0&k=20&c=vrhk6luVn4qRdKFVNokuABLpPrVmM6cKODfNv_74dHQ=",
     name: "Project 1",
-    amount: "$000",
+    amount: "$1000",
+    loginImage: img11,
+    loginDesc:
+      "This is the login page description for Project 1, providing information on user authentication and access.",
+    signupImage: imag12,
+    signupDesc:
+      "The signup page description for Project 1, allowing new users to register and create accounts.",
+    homeImage: img21,
+    homeDesc:
+      "This is the home page description for Project 1, outlining the main features and overview of the project.",
+    aboutImage: img11,
+    aboutDesc:
+      "The about page description for Project 1, providing background and purpose of the project.",
+    contactImage: img21,
+    contactDesc:
+      "The contact page description for Project 1, detailing ways users can reach out for support or inquiries.",
   },
   {
     id: 2,
     image:
       "https://media.istockphoto.com/id/1464561797/photo/artificial-intelligence-processor-unit-powerful-quantum-ai-component-on-pcb-motherboard-with.webp?a=1&b=1&s=612x612&w=0&k=20&c=vrhk6luVn4qRdKFVNokuABLpPrVmM6cKODfNv_74dHQ=",
-    name: "lroject 2",
+    name: "Project 2",
     amount: "$2000",
+    loginImage: img21,
+    loginDesc:
+      "The login page description for Project 2, guiding users through the secure login process.",
+    signupImage: imge22,
+    signupDesc:
+      "The signup page description for Project 2, allowing new users to easily create an account.",
+    homeImage: imag12,
+    homeDesc:
+      "The home page description for Project 2, highlighting its unique features and offerings.",
+    aboutImage: img11,
+    aboutDesc:
+      "The about page description for Project 2, explaining the background and mission.",
+    contactImage: img21,
+    contactDesc:
+      "The contact page description for Project 2, providing users with ways to reach the support team.",
   },
-  {
-    id: 3,
-    image:
-      "https://media.istockphoto.com/id/1464561797/photo/artificial-intelligence-processor-unit-powerful-quantum-ai-component-on-pcb-motherboard-with.webp?a=1&b=1&s=612x612&w=0&k=20&c=vrhk6luVn4qRdKFVNokuABLpPrVmM6cKODfNv_74dHQ=",
-    name: "mroject 2",
-    amount: "$2000",
-  },
-  // Add more projects if necessary
+
+  // Add more projects if necessary, following the same structure
 ];
 
 const ProjectsPage = () => {
@@ -68,8 +97,9 @@ const ProjectsPage = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
-
-  const navigateToProject = () => {
+  const { projectDetails, setProjectDetails } = useContext(UserContext);
+  const navigateToProject = (project) => {
+    setProjectDetails(project);
     router.push("/projectdetails");
   };
 
@@ -170,7 +200,7 @@ const ProjectsPage = () => {
             {currentProjects.map((project, index) => (
               <motion.div
                 key={project.id}
-                onClick={navigateToProject}
+                onClick={() => navigateToProject(project)}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.3 }} // Trigger at 30% visibility

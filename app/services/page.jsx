@@ -303,6 +303,8 @@ const Services = () => {
             <Image
               src={chooseImg} // Replace with your image source
               alt="Description of the image"
+              width={400}
+              height={400}
               className="w-full h-auto rounded-lg transform transition-transform duration-300 hover:scale-105"
             />
           </div>
@@ -421,14 +423,14 @@ const Services = () => {
             hidden: { opacity: 0, x: -50 },
             visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
           }}
-          className={`my-10 w-full p-6 rounded-lg shadow-lg flex items-center ${
+          className={`my-10 w-full p-6 rounded-lg shadow-lg flex flex-col md:flex-row items-center ${
             theme === "dark"
               ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
               : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
           }`}
         >
           {/* Image with hover effect */}
-          <div className="flex-shrink-0 w-1/3 overflow-hidden rounded-lg mr-6">
+          <div className="flex-shrink-0 w-full md:w-1/3 overflow-hidden rounded-lg mb-4 md:mb-0 md:mr-6">
             <motion.div
               className="transition-transform duration-300 hover:scale-105"
               initial={{ opacity: 0 }}
@@ -447,7 +449,7 @@ const Services = () => {
           </div>
 
           {/* Text content */}
-          <div className="w-2/3">
+          <div className="w-full md:w-2/3 text-center md:text-left">
             <h3 className="text-2xl font-bold text-blue-700">
               Ready to elevate your brand?
             </h3>
@@ -462,6 +464,7 @@ const Services = () => {
             </button>
           </div>
         </motion.div>
+
         {/* Gemini Icon */}
         <motion.a
           href="/geminiai"

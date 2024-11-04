@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Snackbar } from "@mui/material"; // Assuming you're using Material-UI for Snackbar
+import { TypeAnimation } from "react-type-animation";
 
 const Chatbot = () => {
   const [question, setQuestion] = useState("");
@@ -77,12 +78,21 @@ const Chatbot = () => {
   return (
     <div className="flex flex-col h-screen bg-gray-900 text-white p-4 mx-8">
       <div className="flex-1 overflow-auto mb-4 p-44">
-        {/* Conditional rendering of welcome message */}
+        {/* Conditional rendering of the welcome message */}
         {messages.length === 0 && (
           <div className="flex justify-center items-center h-full">
-            <p className="text-4xl text-gray-400">
-              Welcome to Google AI Bot! What can I help with?
-            </p>
+            <div className="text-4xl text-gray-400 text-center">
+              <TypeAnimation
+                sequence={[
+                  "Welcome to ErrTeknalozy AI! Searching for anything? Here to clarify your doubts.", // Display single message
+                  2000,
+                ]}
+                wrapper="div"
+                cursor={true}
+                repeat={0} // No loop
+                style={{ whiteSpace: "pre-line" }} // Keeps formatting in one line
+              />
+            </div>
           </div>
         )}
         {messages.map((msg, index) => (
@@ -90,11 +100,7 @@ const Chatbot = () => {
             key={index}
             className={`my-2 p-3 rounded-lg ${
               msg.user ? "bg-blue-600 self-end" : "bg-gray-700 self-start"
-            } ${
-              msg.user
-                ? "sm:max-w-sm md:max-w-md lg:max-w-lg"
-                : "sm:max-w-sm md:max-w-md lg:max-w-lg"
-            }`}
+            } sm:max-w-sm md:max-w-md lg:max-w-lg`}
             style={{
               alignSelf: msg.user ? "flex-end" : "flex-start",
               marginLeft: msg.user ? "auto" : "0",
@@ -108,7 +114,7 @@ const Chatbot = () => {
         <div ref={messagesEndRef} />
       </div>
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-gray-900 flex justify-center mx-16">
-        <div className="flex items-center border border-gray-700 rounded-lg bg-gray-800 max-w-2xl w-full ">
+        <div className="flex items-center border border-gray-700 rounded-lg bg-gray-800 max-w-2xl w-full">
           <input
             className="flex-1 p-3 bg-transparent text-white outline-none placeholder-gray-500 rounded-l-lg"
             type="text"

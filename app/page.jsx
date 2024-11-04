@@ -4,10 +4,14 @@ import { motion } from "framer-motion";
 import Carousel from "./components/Carousel";
 import Footer from "./components/Footer";
 import ThemeContext from "./ThemeContext";
+import { TypeAnimation } from "react-type-animation";
 import Head from "next/head";
 import { SiGooglegemini } from "react-icons/si";
 import errtek from "./home1.jpeg";
+import Tilt from "react-parallax-tilt";
+import imgTree from "../public/images/home2.jpeg"; // Replace with your image import
 import Image from "next/image";
+import ProjectCorousal from "./components/ProjectCorousal";
 
 const Page = () => {
   const { theme } = useContext(ThemeContext);
@@ -93,11 +97,40 @@ const Page = () => {
             hidden: { opacity: 0, x: -50 },
             visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
           }}
-          className="text-center py-20"
+          className="text-center py-20 h-[400px]  md:h-auto"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Welcome to ErrTeknalozy
+          {/* Heading with typing animation */}
+          <h1 className="text-xl md:text-2xl font-bold mb-4 flex justify-center items-center lg:text-3xl">
+            <TypeAnimation
+              sequence={[
+                "Welcome to ErrTeknalozy", // Sentence 1
+                5000, // Show for 5s
+                "Innovating the Future with Technology", // Sentence 2
+                3000, // Show for 3s
+                "Empowering Businesses with Tech Solutions", // Sentence 3
+                4000, // Show for 4s
+                "Your Digital Transformation Partner", // Sentence 4
+                3000, // Show for 3s
+              ]}
+              wrapper="span"
+              cursor={true}
+              repeat={Infinity}
+              className="text-4xl md:text-6xl font-bold"
+            />
+            <motion.span
+              className="ml-2 text-3xl sm:text-3xl md:text-4xl lg:text-5xl"
+              animate={{ rotate: [0, -20, 20, -20, 20, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.5,
+                repeatDelay: 5,
+              }}
+            >
+              👋
+            </motion.span>
           </h1>
+
+          {/* Subtitle Text with Tailwind styling */}
           <p className="text-lg md:text-2xl mb-8">
             Your source for tech solutions, insights, and innovation.
           </p>
@@ -285,6 +318,170 @@ const Page = () => {
               View All Services
             </motion.button>
           </motion.div>
+        </motion.section>
+
+        {/* Featured Team Section */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={{
+            hidden: { opacity: 0, x: -50 },
+            visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+          }}
+          className={`px-4  mt-10 sm:px-6 md:px-10 lg:px-14 rounded-lg shadow-lg lg:mx-16 ${
+            theme === "dark"
+              ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+              : "bg-white text-gray-900"
+          }`}
+        >
+          <div className="flex flex-col md:flex-row items-center gap-5">
+            {/* Left Side Image */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+              }}
+              className="w-full md:w-1/2"
+            >
+              <ProjectCorousal />
+            </motion.div>
+
+            {/* Right Side Content */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              variants={{
+                hidden: { opacity: 0, x: 50 },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+              }}
+              className="w-full md:w-1/2 space-y-4"
+            >
+              <h2 className="text-3xl font-bold text-center mb-8">
+                About Our Team
+              </h2>
+
+              <h3 className="text-2xl font-semibold mb-2">
+                Innovating the Future with Technology
+              </h3>
+              <p className="text-lg">
+                At ErrTeknalozy, we’re passionate about driving technological
+                progress. Our mission is to provide cutting-edge tech solutions
+                tailored to meet the needs of modern businesses and individuals.
+              </p>
+              <p className="text-lg">
+                Our team of experts is dedicated to innovation, quality, and
+                excellence. From web development to tech consulting, we are here
+                to empower you with the tools you need for success in today’s
+                digital world.
+              </p>
+              <p className="text-lg">
+                Discover what ErrTeknalozy can do for you – let’s create
+                something extraordinary together.
+              </p>
+              {/* Centered Button */}
+              <div className="flex justify-center pb-4">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  className="px-6 py-3 pb-4 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300"
+                >
+                  View Our Team
+                </motion.button>
+              </div>
+            </motion.div>
+          </div>
+        </motion.section>
+
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={{
+            hidden: { opacity: 0, x: -50 },
+            visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+          }}
+          className={`py-16 px-4 mt-10 sm:px-6 md:px-10 lg:px-14 rounded-lg shadow-lg lg:mx-16 ${
+            theme === "dark"
+              ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+              : "bg-white text-gray-900"
+          }`}
+        >
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            {/* Left Side Image with Tilt Effect */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+              }}
+              className="w-full md:w-1/2"
+            >
+              <Tilt
+                className="parallax-effect-img"
+                tiltMaxAngleX={40}
+                tiltMaxAngleY={40}
+                perspective={800}
+                transitionSpeed={1500}
+                scale={1.1}
+                gyroscope={true}
+              >
+                <Image
+                  src={imgTree} // Or replace with your `errtek` image
+                  alt="About ErrTeknalozy"
+                  width={500}
+                  height={500}
+                  className="rounded-lg shadow-lg inner-element"
+                />
+              </Tilt>
+            </motion.div>
+
+            {/* Right Side Content */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              variants={{
+                hidden: { opacity: 0, x: 50 },
+                visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+              }}
+              className="w-full md:w-1/2 space-y-4"
+            >
+              <h2 className="text-3xl font-bold text-center mb-8">
+                About ErrTeknalozy Projects
+              </h2>
+
+              <p className="text-lg">
+                At ErrTeknalozy, we’re passionate about driving technological
+                progress. Our mission is to provide cutting-edge tech solutions
+                tailored to meet the needs of modern businesses and individuals.
+              </p>
+              <p className="text-lg">
+                Our team of experts is dedicated to innovation, quality, and
+                excellence. From web development to tech consulting, we are here
+                to empower you with the tools you need for success in today’s
+                digital world.
+              </p>
+              <p className="text-lg">
+                Discover what ErrTeknalozy can do for you – let’s create
+                something extraordinary together.
+              </p>
+              {/* Centered Button */}
+              <div className="flex justify-center">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300"
+                >
+                  View About Us
+                </motion.button>
+              </div>
+            </motion.div>
+          </div>
         </motion.section>
 
         {/* Footer with Gemini Icon Fixed */}

@@ -3,10 +3,10 @@ import "./globals.css";
 import SplashLayout from "./components/SplashLayout";
 import ThemeContext, { ThemeProvider } from "./ThemeContext";
 import { UserProvider } from "./UserContext";
-import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// Define metadata for the page
 export const metadata = {
   title: "ErrTeknalozy | Your Source for Tech Solutions",
   description:
@@ -41,56 +41,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        {/* Standard Meta Tags */}
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords} />
-
-        {/* Google Site Verification Meta Tag */}
-        <meta
-          name="google-site-verification"
-          content="FNgjZTzXM-Bza4KINhZYNEyLL"
-        />
-
-        {/* Open Graph Meta Tags */}
-        <meta property="og:type" content={metadata.openGraph.type} />
-        <meta property="og:url" content={metadata.openGraph.url} />
-        <meta property="og:title" content={metadata.openGraph.title} />
-        <meta
-          property="og:description"
-          content={metadata.openGraph.description}
-        />
-        <meta property="og:image" content={metadata.openGraph.images[0].url} />
-
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content={metadata.twitter.card} />
-        <meta name="twitter:site" content={metadata.twitter.site} />
-        <meta name="twitter:title" content={metadata.twitter.title} />
-        <meta
-          name="twitter:description"
-          content={metadata.twitter.description}
-        />
-        <meta name="twitter:image" content={metadata.twitter.image} />
-
-        {/* Structured Data (JSON-LD for SEO) */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            url: "https://errteknalozy.netlify.app",
-            name: "ErrTeknalozy",
-            description: metadata.description,
-            potentialAction: {
-              "@type": "SearchAction",
-              target:
-                "https://errteknalozy.netlify.app/search?query={search_term_string}",
-              "query-input": "required name=search_term_string",
-            },
-          })}
-        </script>
-      </Head>
-
       <body className={inter.className}>
         <UserProvider>
           <ThemeProvider>

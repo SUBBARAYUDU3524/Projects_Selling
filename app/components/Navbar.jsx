@@ -208,7 +208,13 @@ const Navbar = () => {
           <div className="flex flex-col  h-full px-8 py-6 overflow-y-auto">
             {/* Theme Toggle Button in Blue Background */}
 
-            <div className="flex justify-end  bg-blue-500 p-2 ">
+            <div
+              className={`flex justify-end  p-2 ${
+                theme === "dark"
+                  ? "bg-gray-600 text white"
+                  : "bg-blue-200 text-black"
+              }`}
+            >
               <button onClick={toggleTheme} className="text-2xl">
                 {theme === "dark" ? (
                   <FaSun className="text-yellow-400" />
@@ -218,7 +224,13 @@ const Navbar = () => {
               </button>
             </div>
             {/* User Profile Section */}
-            <div className="bg-blue-500 p-4  mb-4">
+            <div
+              className={`p-4  mb-4 ${
+                theme === "dark"
+                  ? "bg-gray-600 text white"
+                  : "bg-blue-200 text-black"
+              }`}
+            >
               {" "}
               {/* Different color for user section */}
               {currentUser ? (

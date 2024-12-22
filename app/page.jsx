@@ -32,7 +32,7 @@ const Page = () => {
 
         {/* Open Graph Meta Tags */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://errteknalozy.netlify.app" />
+        <meta property="og:url" content="https://errteknalozy.in" />
         <meta
           property="og:title"
           content="ErrTeknalozy | Home - Tech Solutions & Innovation"
@@ -43,12 +43,12 @@ const Page = () => {
         />
         <meta
           property="og:image"
-          content="https://errteknalozy.netlify.app/og-image.jpg"
+          content="https://errteknalozy.in/og-image.jpg"
         />
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://errteknalozy.netlify.app" />
+        <meta name="twitter:url" content="https://errteknalozy.in" />
         <meta
           name="twitter:title"
           content="ErrTeknalozy | Home - Tech Solutions & Innovation"
@@ -59,7 +59,7 @@ const Page = () => {
         />
         <meta
           name="twitter:image"
-          content="https://errteknalozy.netlify.app/twitter-image.jpg"
+          content="https://errteknalozy.in/twitter-image.jpg"
         />
 
         {/* Structured Data (JSON-LD) */}
@@ -68,13 +68,13 @@ const Page = () => {
             "@context": "https://schema.org",
             "@type": "WebSite",
             name: "ErrTeknalozy",
-            url: "https://errteknalozy.netlify.app",
+            url: "https://errteknalozy.in",
             description:
               "Explore ErrTeknalozy for tech solutions, insights, and modern web development ideas.",
             potentialAction: {
               "@type": "SearchAction",
               target:
-                "https://errteknalozy.netlify.app/search?query={search_term_string}",
+                "https://errteknalozy.in/search?query={search_term_string}",
               "query-input": "required name=search_term_string",
             },
           })}

@@ -28,10 +28,7 @@ const ContactPage = () => {
 
         {/* Open Graph Meta Tags */}
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://errteknalozy.netlify.app/contact"
-        />
+        <meta property="og:url" content="https://errteknalozy.in/contact" />
         <meta
           property="og:title"
           content="ErrTeknalozy | Contact Us - Get in Touch for Web & App Development"
@@ -42,15 +39,12 @@ const ContactPage = () => {
         />
         <meta
           property="og:image"
-          content="https://errteknalozy.netlify.app/og-image-contact.jpg"
+          content="https://errteknalozy.in/og-image-contact.jpg"
         />
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:url"
-          content="https://errteknalozy.netlify.app/contact"
-        />
+        <meta name="twitter:url" content="https://errteknalozy.in/contact" />
         <meta
           name="twitter:title"
           content="ErrTeknalozy | Contact Us - Get in Touch for Web & App Development"
@@ -61,7 +55,7 @@ const ContactPage = () => {
         />
         <meta
           name="twitter:image"
-          content="https://errteknalozy.netlify.app/twitter-image-contact.jpg"
+          content="https://errteknalozy.in/twitter-image-contact.jpg"
         />
 
         {/* Structured Data (JSON-LD) */}
@@ -70,7 +64,7 @@ const ContactPage = () => {
             "@context": "https://schema.org",
             "@type": "ContactPage",
             name: "ErrTeknalozy Contact",
-            url: "https://errteknalozy.netlify.app/contact",
+            url: "https://errteknalozy.in/contact",
             description:
               "Contact ErrTeknalozy for web and app development inquiries, support, and tech consulting. Connect for innovative solutions.",
             contactPoint: {

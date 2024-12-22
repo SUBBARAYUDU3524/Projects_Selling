@@ -152,10 +152,7 @@ const Page = () => {
 
         {/* Open Graph Meta Tags */}
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://errteknalozy.netlify.app/about"
-        />
+        <meta property="og:url" content="https://errteknalozy.in/about" />
         <meta
           property="og:title"
           content="ErrTeknalozy | About Us - Innovating Tech Solutions"
@@ -166,15 +163,12 @@ const Page = () => {
         />
         <meta
           property="og:image"
-          content="https://errteknalozy.netlify.app/og-image-about.jpg"
+          content="https://errteknalozy.in/og-image-about.jpg"
         />
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:url"
-          content="https://errteknalozy.netlify.app/about"
-        />
+        <meta name="twitter:url" content="https://errteknalozy.in/about" />
         <meta
           name="twitter:title"
           content="ErrTeknalozy | About Us - Innovating Tech Solutions"
@@ -185,7 +179,7 @@ const Page = () => {
         />
         <meta
           name="twitter:image"
-          content="https://errteknalozy.netlify.app/twitter-image-about.jpg"
+          content="https://errteknalozy.in/twitter-image-about.jpg"
         />
 
         {/* Structured Data (JSON-LD) */}
@@ -194,13 +188,13 @@ const Page = () => {
             "@context": "https://schema.org",
             "@type": "WebPage",
             name: "ErrTeknalozy About Page",
-            url: "https://errteknalozy.netlify.app/about",
+            url: "https://errteknalozy.in/about",
             description:
               "Discover ErrTeknalozy's mission, vision, and values as we provide cutting-edge tech solutions.",
             potentialAction: {
               "@type": "SearchAction",
               target:
-                "https://errteknalozy.netlify.app/search?query={search_term_string}",
+                "https://errteknalozy.in/search?query={search_term_string}",
               "query-input": "required name=search_term_string",
             },
           })}

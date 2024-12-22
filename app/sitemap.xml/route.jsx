@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseUrl = "https://errteknalozy.netlify.app";
+  const baseUrl = "https://errteknalozy.in";
 
   // Define your static and dynamic page URLs here
   const staticPages = [

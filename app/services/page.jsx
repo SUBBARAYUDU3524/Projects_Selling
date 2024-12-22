@@ -94,10 +94,7 @@ const Services = () => {
 
         {/* Open Graph Meta Tags */}
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://errteknalozy.netlify.app/services"
-        />
+        <meta property="og:url" content="https://errteknalozy.in/services" />
         <meta
           property="og:title"
           content="ErrTeknalozy | Our Services - Web Development & App Solutions"
@@ -108,15 +105,12 @@ const Services = () => {
         />
         <meta
           property="og:image"
-          content="https://errteknalozy.netlify.app/og-image-services.jpg"
+          content="https://errteknalozy.in/og-image-services.jpg"
         />
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:url"
-          content="https://errteknalozy.netlify.app/services"
-        />
+        <meta name="twitter:url" content="https://errteknalozy.in/services" />
         <meta
           name="twitter:title"
           content="ErrTeknalozy | Our Services - Web Development & App Solutions"
@@ -127,7 +121,7 @@ const Services = () => {
         />
         <meta
           name="twitter:image"
-          content="https://errteknalozy.netlify.app/twitter-image-services.jpg"
+          content="https://errteknalozy.in/twitter-image-services.jpg"
         />
 
         {/* Structured Data (JSON-LD) */}
@@ -136,12 +130,12 @@ const Services = () => {
             "@context": "https://schema.org",
             "@type": "WebPage",
             name: "ErrTeknalozy Services",
-            url: "https://errteknalozy.netlify.app/services",
+            url: "https://errteknalozy.in/services",
             description:
               "Explore ErrTeknalozy's services in web and app development, providing tailored solutions for modern businesses.",
             mainEntityOfPage: {
               "@type": "WebSite",
-              "@id": "https://errteknalozy.netlify.app",
+              "@id": "https://errteknalozy.in",
             },
           })}
         </script>

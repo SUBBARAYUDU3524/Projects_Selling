@@ -4,6 +4,7 @@ import { useContext } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion"; // For scroll animations
 import UserContext from "../UserContext";
+import ThemeContext from "../ThemeContext";
 
 const pages = [
   {
@@ -41,6 +42,7 @@ const pages = [
 const ProjectDetailsPage = () => {
   const router = useRouter();
   const { projectDetails } = useContext(UserContext);
+  const { theme } = useContext(ThemeContext);
 
   // Function to navigate to a particular page
   const navigateToPage = (pageName) => {
@@ -59,12 +61,18 @@ const ProjectDetailsPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">
+    <div
+      className={`container mx-auto  rounded-lg shadow-md ${
+        theme === "dark"
+          ? "bg-gradient-to-br from-gray-800 to-gray-900 text-white"
+          : "bg-gradient-to-br from-white to-blue-200 text-gray-900"
+      }`}
+    >
+      <h1 className="text-3xl font-bold p-6 text-center">
         {projectDetails.name} - {projectDetails.amount}
       </h1>
 
-      {/* Display the main project image */}
+      {/* Main Project Image */}
       <div className="md:w-1/2 mb-4 md:mb-0 mx-auto">
         <Image
           src={projectDetails.image}
@@ -75,57 +83,56 @@ const ProjectDetailsPage = () => {
         />
       </div>
 
-      <div className="container mx-auto py-16">
-        <div className="grid gap-16">
-          {/* Display project pages with images */}
-          {pages.map((page, index) => (
-            <motion.div
-              key={page.id}
-              className={`flex flex-col md:flex-row ${
-                index % 2 === 0 ? "md:flex-row-reverse" : ""
-              } bg-white border rounded-lg shadow-lg p-6 hover:shadow-2xl cursor-pointer`}
-              onClick={() => navigateToPage(page.name)}
-              variants={index % 2 === 0 ? leftAnimation : rightAnimation}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.5 }}
-            >
-              {/* Conditionally render image based on imageKey */}
-              {projectDetails[page.imageKey] ? (
-                <div className="md:w-1/2 mb-4 md:mb-0">
-                  <Image
-                    src={projectDetails[page.imageKey]}
-                    alt={page.name}
-                    width={400}
-                    height={400}
-                    className="rounded-lg object-cover"
-                  />
-                </div>
-              ) : null}
-
-              {/* Text container */}
-              <div className="md:w-1/2 md:px-8">
-                <h2 className="text-3xl font-semibold mb-4">{page.name}</h2>
-                {/* Fetch the specific description for each page */}
-                <p className="text-lg text-gray-700">
-                  {projectDetails[page.description]}
-                </p>
+      <div className={`grid gap-16  rounded-lg shadow-lg lg:p-16`}>
+        {/* Project Pages with Images */}
+        {pages.map((page, index) => (
+          <motion.div
+            key={page.id}
+            className={`flex flex-col md:flex-row ${
+              index % 2 === 0 ? "md:flex-row-reverse" : ""
+            } rounded-lg shadow-md p-6 hover:shadow-2xl cursor-pointer ${
+              theme === "dark"
+                ? "bg-gray-800 text-white"
+                : "bg-white text-gray-900"
+            }`}
+            onClick={() => navigateToPage(page.name)}
+            variants={index % 2 === 0 ? leftAnimation : rightAnimation}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }}
+          >
+            {/* Conditionally Render Image Based on imageKey */}
+            {projectDetails[page.imageKey] ? (
+              <div className="md:w-1/2 mb-4 md:mb-0">
+                <Image
+                  src={projectDetails[page.imageKey]}
+                  alt={page.name}
+                  width={400}
+                  height={400}
+                  className="rounded-lg object-cover"
+                />
               </div>
-            </motion.div>
-          ))}
-        </div>
+            ) : null}
+
+            {/* Text Container */}
+            <div className="md:w-1/2 md:px-8">
+              <h2 className="text-3xl font-semibold mb-4">{page.name}</h2>
+              <p className="text-lg">{projectDetails[page.description]}</p>
+            </div>
+          </motion.div>
+        ))}
 
         {/* Live Preview and Buy Now Buttons */}
         <div className="mt-10 flex justify-center gap-6">
           <button
-            className="bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-600 hover:shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out"
+            className="bg-blue-500 font-semibold py-3 px-6 rounded-lg hover:bg-blue-600 hover:shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out"
             onClick={() => window.open("https://www.google.com", "_blank")}
           >
             Live Preview Of Project
           </button>
           <button
-            className="bg-green-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-600 hover:shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out"
-            onClick={() => alert("Redirecting to purchase...")}
+            className="bg-green-500 font-semibold py-3 px-6 rounded-lg hover:bg-green-600 hover:shadow-lg transform hover:scale-105 transition-transform duration-300 ease-in-out"
+            onClick={() => router.push("/razorpay")}
           >
             Buy Now
           </button>

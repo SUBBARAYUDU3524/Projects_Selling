@@ -15,13 +15,13 @@ export const metadata = {
     "ErrTeknalozy, web development projects for sale, app development resources, buy web applications, purchase mobile app templates, affordable web development services, custom software solutions, project management tools, e-commerce development projects, responsive website templates, digital marketing resources, website design for startups, professional web applications, software development projects, mobile app design services, online learning platforms, technology project buying guide, best web development practices, application development solutions, innovative web projects",
   openGraph: {
     type: "website",
-    url: "https://errteknalozy.netlify.app",
+    url: "https://errteknalozy.in",
     title: "ErrTeknalozy | Your Source for Tech Solutions",
     description:
       "Explore ErrTeknalozy for innovative tech solutions and resources tailored to modern development needs.",
     images: [
       {
-        url: "https://errteknalozy.netlify.app/og-image.jpg",
+        url: "https://errteknalozy.in/og-image.jpg",
         width: 800,
         height: 600,
         alt: "ErrTeknalozy - Your Source for Tech Solutions",
@@ -34,7 +34,7 @@ export const metadata = {
     title: "ErrTeknalozy | Your Source for Tech Solutions",
     description:
       "Explore innovative tech solutions and resources at ErrTeknalozy.",
-    image: "https://errteknalozy.netlify.app/twitter-image.jpg",
+    image: "https://errteknalozy.in/twitter-image.jpg",
   },
 };
 

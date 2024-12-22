@@ -5,7 +5,7 @@ export async function GET() {
   const content = `
     User-agent: *
     Allow: /
-    Sitemap: https://errteknalozy.netlify.app/sitemap.xml
+    Sitemap: https://errteknalozy.in/sitemap.xml
   `;
 
   return new NextResponse(content, {

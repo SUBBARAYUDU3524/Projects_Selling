@@ -12,7 +12,6 @@ import Tilt from "react-parallax-tilt";
 import imgTree from "../public/images/home2.jpeg"; // Replace with your image import
 import Image from "next/image";
 import ProjectCorousal from "./components/ProjectCorousal";
-
 const Page = () => {
   const { theme } = useContext(ThemeContext);
 

@@ -63,6 +63,7 @@ const ProfileBox = ({ user, onClose }) => {
       >
         Update Profile
       </button>
+
       {/* Optional Logout Button */}
       <button
         onClick={handleLogout}

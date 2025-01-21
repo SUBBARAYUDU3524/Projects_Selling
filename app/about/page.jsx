@@ -8,6 +8,7 @@ import { FaBullseye, FaEye, FaHeart } from "react-icons/fa"; // Import icons for
 import Footer from "../components/Footer";
 import ThemeContext from "../ThemeContext";
 import Head from "next/head";
+import BannerAd from "../components/BannerAd";
 
 const Page = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -218,6 +219,7 @@ const Page = () => {
             objectPosition="center"
             className="brightness-50"
           />
+
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <h1 className="text-7xl font-bold text-white text-center">
               About Us

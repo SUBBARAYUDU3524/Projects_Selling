@@ -15,6 +15,7 @@ import Head from "next/head";
 import { motion } from "framer-motion";
 import login from "../../public/images/login.jpeg";
 import ThemeContext from "../ThemeContext";
+import BannerAd from "../components/BannerAd";
 
 export default function Login() {
   const { theme } = useContext(ThemeContext);
@@ -174,6 +175,7 @@ export default function Login() {
           </div>
         </motion.section>
         {/* Image Container */}
+        <BannerAd />
       </div>
     </>
   );

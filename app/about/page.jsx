@@ -8,7 +8,6 @@ import { FaBullseye, FaEye, FaHeart } from "react-icons/fa"; // Import icons for
 import Footer from "../components/Footer";
 import ThemeContext from "../ThemeContext";
 import Head from "next/head";
-import BannerAd from "../components/BannerAd";
 
 const Page = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
